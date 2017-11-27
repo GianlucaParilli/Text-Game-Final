@@ -66,32 +66,27 @@ public class Controller {
 		temp.setOnAction(e -> {
 			item.addObserver(LostTreasureMain.gui);
 			item.viewItems(room.getCurrentRoom());
-			String tempID;
+			String tempRoomID;
+			String tempitemID = "";
 			for (Rooms roomTemp : room.getRoomsArray()) {
 				if (roomTemp.getRoomName().equals(dropdown) ) {	
-					tempID = roomTemp.getItem();
-					for(Items item : item.getItemsArray()) {
-						if(item.getItemID().equals(tempID)) {
-							System.out.println("2" + item.getItemID());
+					tempRoomID = roomTemp.getItem();
+					System.out.println("tt" + tempRoomID);
+					for(Items itemTemp : item.getItemsArray()) {
+						if(itemTemp.getItemID().equals(tempRoomID)) {
+							
+							System.out.println("2" + itemTemp.getItemID());
+							tempitemID = item.getItemID();
+							System.out.println(" " +roomTemp.isLooted());
 
+							if(roomTemp.isLooted()==false) {	
+							String name = itemTemp.getItemName();
+							item.getInventory().add(name);
+							System.out.println("picked item");
+							roomTemp.setLooted(true);
+							}
 						}
-
-					}
-					
-					System.out.println("1" + roomTemp.getItem());
-
-					
-					
-					if(item.getItemsArray().get(0).getAvailability()>0) {
-						item.getItemsArray().get(roomTemp.getCurrentRoom()).setAvailability(0);
-						System.out.println("wo");
-						item.getInventory().add(item.getItemDescription());
-
-					}
-					else {
-						System.out.println("looteddddd");
-					}
-					
+					}									
 				}
 				//unlocks room 9
 				if(roomTemp.getItem().equals("W5")) {//item.getKeysID().get(0))) {
@@ -162,7 +157,6 @@ public class Controller {
 						if(roomTemp.getRoomName().equals(dropdown) && roomTemp.isLooted() == false)
 						{
 							roomTemp.setSearched(true);
-							roomTemp.setLooted(true);
 							System.out.println(roomTemp.isSearched() + "sss");
 							room.enableButtons(LostTreasureMain.gui.pickupItem);	
 						} else 
