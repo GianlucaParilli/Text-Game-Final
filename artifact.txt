@@ -1,0 +1,120 @@
+W1
+Sword
+Steel Sword
+Weapon
+Use as a melee weapon take out enemies and monsters
+10 Attack Points
+W2
+Spear
+10ft Wooden pole with sharp steel tip
+Weapon
+Use as a melee weapon take out enemies and monsters
+10 Attack Points
+W3
+Shield
+Steel Shield
+Armor
+Use as protection from melee attacks given from monsters
+50 HP
+W4
+Musket Pistol
+Musket
+Weapon
+Use as a long-range weapon to take out enemies and monsters
+50 HP
+W5
+Ammunition
+Brass casing with gun powder and copper bullet
+Weapon
+Use to reload musket pistol 
+10 rounds
+W6
+Body Armor
+Steel Vest
+Gear
+Reduce damage given by enemies and monsters
+50 HP
+H1
+Bandage
+Cotton Bandages
+Health Item
+Use to provide self-aid when health points are low
+10 HP
+H2
+Healing Potion 
+Glass bottle with ancient healing water
+Health Item
+Use to provide self-aid when health points are low
+100 HP
+H3
+Cotton Wrap
+Soft spool of cotton
+Health Item
+Use to conduct self-aid on open wounds
+20 HP
+H4
+Mummy Wrap
+Cotton wraps
+Health Items
+Use as bandage wraps from damage given by monsters
+10 HP
+H5
+Bat Meat
+Raw meat from a bat
+Health Item
+Eat to restore a small amount of health
+5 HP
+N1
+Ancient Map
+Map
+Navigation
+Map of the lost temple
+none
+S1
+Large Backpack 
+20 pound shoulder bag
+Storage
+Large backpack to carry items
+none
+K1 
+Gold Star
+Star shaped object made of gold
+Key
+Item used to unlock L1 door
+none
+K2
+Left Half of an Ornate Skull
+Half of a decorative skull
+Key
+Use other half to unlock L2
+none
+K3
+Right Half of an Ornate Skull
+Half of a decorative skull
+Key 
+Use with other half to unlock L2
+none
+K4
+The Kings Ruby
+A ruby that once belonged to the king.
+Key
+Ancient gem used to unlock certain door
+none
+K5
+The Kings Sapphire 
+A sapphire that once belonged to the king.
+Key
+Ancient gem used to unlock certain door
+none
+K6
+Golden Key
+A key made of solid gold
+Key
+Key that opens the door
+none
+K7
+Silver Key
+A key made of solid silver
+Key
+Key that opens the door
+none1

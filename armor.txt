@@ -1,0 +1,8 @@
+W3
+Shield
+Steel Shield
+50
+W6
+Body Armor
+Steel Vest
+50

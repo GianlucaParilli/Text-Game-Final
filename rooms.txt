@@ -1,0 +1,297 @@
+﻿r0
+Entrance Hall
+Description: A large, rectangular room with the skeletons of the men sworn to guard the Kings treasure strewn about the ground. There is a large, metal door on the southern end of the room, and four small stone archways on the east and west ends of the room.
+r1, r2, r3, r4, r5, r6, r7, r8, r9
+M1
+P1
+none
+8
+false
+r1
+Guards Quarters A
+Description: A small room that once served as a guards living quarters. There is a stone bed and a decrepit wooden shelf.
+r0, r2
+M1
+P1
+K1, W5
+0
+false
+r2
+Guards Quarters B
+Description: A small room that once served as a guards living quarters. There is a decaying skeleton lying on a stone bed.
+r0, r1, r3
+M1
+P1
+K1
+0
+false
+r3
+Guards Quarters C
+Description: A small room that once served as a guards living quarters. An feeble, rusty sword and shield hang on the wall.
+r0, r2, r4
+M1
+P1
+K1
+0
+false
+r4
+Guards Quarters D
+Description: A small room that once served as a guards living quarters. A skeleton is sitting in a wooden chair collapsed over a wooden table. You notice something in its hand.
+r0, r3
+M1
+P1
+N1, K1
+0
+false
+r5
+Guards Quarters E
+Description: A small room that once served as a guards living quarters. A rat scurries through a small crack in the wall as you enter.
+r0, r6
+M1
+P1
+K1, H1
+0
+false
+r6
+Guards Quarters F
+Description: A small room that once served as a guards living quarters. There is a stone bed lined with rotten leather. The smell is almost unbearable. 
+r0, r5, r7
+M1
+P1
+K1, W5
+0
+false
+r7
+Guards Quarters G
+Description: A small room that once served as a guards living quarters. It seems like someone lit a fire in here. Everything is charred and covered in ash.
+r0, r06, r8
+M1
+P1
+K1
+0
+false
+r8
+Guards Quarters H
+Description: A small room that once served as a guards living quarters. Rotten, unreadable papers cover the dusty, stone floor.
+r0, r7
+M1
+P1
+K1, H1
+0
+false
+r9
+Main Hallway
+Description: Hallway with dusty old carpet, cracked walls, dusty shelves infested with cobwebs, ripped couches.
+r0, r10
+M1
+none
+none
+0
+true
+r10
+Hexagon Chamber
+Description: A room with with six sides. This room has two doors, one located to the east and another located to the west.
+r09, r11, r13, r15
+M1
+none
+none
+0
+false
+r11
+West Hallway
+Description: Hallway with dusty shelves and couches. Has candles lit for light along with skeletons lying on the carpet in pieces. Has two doors leading to the west chamber and the elevator room
+r10, r12
+M1
+none
+none
+0
+false
+r12
+West Chamber
+Description: A chamber with ancient artifacts, shelves, tables, chairs. 
+r11
+M1
+P2
+K2
+0
+false
+r13
+East Hallway
+Description: A hallway with a lit torch will with cobwebs and rats running around. The ceiling has a water leak dripping from above. 
+r10, r14
+M1
+none
+none
+0
+false
+r14
+East Chamber
+Description: A chamber with book shelves, tables, cobwebs, old ripped scripts and skeletons. 
+r13
+M1
+p3
+K3
+0
+false
+r15
+South Hallway
+Description: A dark stoned hallway with glowworms on the ceiling. 
+r10, r16
+M1
+none
+none
+0
+true
+r16
+Elevator Room
+Description: Wide open room with a hole in the middle with one room in each corner.
+r17, r18, r19, r20, r32
+M2
+none
+none
+0
+false
+r17
+Armory
+Description: A room with knives, swords, bow and arrows, and spears. You see a large wooden chest with a riddle written around the lock.
+r16
+M1
+p4
+W6
+0
+false
+r18
+Switch Room
+Description: A small room with a large mechanical device in the center. There is an ornate metal lever in the middle of it. 
+r16
+M1
+p5
+none
+0
+false
+r19
+Alchemy Lab
+Description: Room with various herbs potions and remedies. There are empty flasks and laboratory equipment all over the room.
+r16
+M1
+none
+H1x3, H2x5
+0
+false
+r20
+Closet
+Description: A small closet with dusty, ripped shirts, pants, and hats.
+r16
+M1
+none
+S1
+0
+false
+r21
+Antechamber
+Description: A large rectangular chamber with an elevator to the upper levels in the center. It looks as though no one has been down here in a very long time. There is an exit to the east and west, but massive metal door on the south side of the room catches your eye.
+r22, r24, r26, r32
+M3, M4, M5
+none
+none
+0
+false
+r22
+Dark Hallway
+Description: A pitch-black hallway. The only thing you can see is a small beam of light at either end.
+r21, r23
+M3, M4, M5
+none
+none
+0
+false
+r23
+West Dungeon
+Description: Dungeon room with skulls, prisoners bones, chains, and metal shackles.
+r22
+M3, M4, M5
+p6
+K4
+0
+false
+r24
+Collapsing Hallway
+Description: A hallway with collapsed ceilings, cracked walls, cobwebs, bits and pieces of the ceiling on the ground with dusk in the air.
+r21, r25
+M3, M4, M5
+none
+none
+0
+false
+r25
+East Dungeon
+Description: Dungeon room with skulls, prisoners bones, chains, and metal shackles.
+r24
+M6
+p7
+K5
+0
+false
+r26
+Path of Corpses
+Description: An underground fork tunnel that has human remains stacked against the walls.
+r21, r27, r28
+M3, M4, M5
+none
+none
+0
+true
+r27
+West Burial Chamber
+Description: A chamber that is used as a grave for the Kings nobles and the human remains are placed on manmade beds within the walls. 
+r26, r29
+M3, M4, M5
+p8
+K6
+0
+false
+r28
+East Burial Chamber
+Description: A chamber that is used as a grave for the Kings nobles and the human remains are placed on manmade beds within the walls.
+r26, r30
+M8
+none
+K7
+0
+false
+r29
+Golden Hallway
+Description: Gold hallway with shiny gold chairs, picture frames, shelves, books, gold doors and door knobs
+r27, r31
+M3, M4, M5
+none
+H2
+0
+false
+r30
+Path of Statues
+Description: This hallway is many statues of the king and his trustworthy noblemen made of shiny silver granite 
+r28, r30
+M3, M4, M5
+none
+H2
+0
+false
+r31
+Treasure Room
+Description: A large room filled with ancient gold treasure that belongs to the King.
+r29, r30
+M6
+none
+none
+0
+true
+r32
+Elevator
+Description: There is a large hole in the center of the room. It looks like this must be a lift to the lower level (find the switch to operate the lift).
+r16, r21
+none
+none
+none
+0
+true

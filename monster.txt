@@ -1,0 +1,64 @@
+M1
+Bandit	
+Watch out! You have encountered a Bandit! Fight him to get to the next room! 50 Health Points+
+10 EXP Gained!
+10 Damage Given
+50 Health Points 
+40
+Sword and Ammo were dropped! 10 EXP Gained!
+M2
+Stone Guard Boss
+Watch out! You have encountered a Stone Guard Boss with a body made of concrete boulders. Choose to Fight or Flee. 50 Health Points+
+50 EXP Gained!
+25 Damage Given
+50 Health Points
+10
+Shield body armor were dropped! 50 EXP Gained!
+M3
+Human Skeleton Warrior 
+Heads up! An ancient Human Skeleton Warrior has resurrected from the dead and is coming towards you! Choose to Fight or Flee. 50 Health Points+
+10 EXP Gained!
+10 Damage Given
+50 Health Points
+40 
+Spear and shield were dropped! 10 EXP Gained!
+M4
+Bat Eye 
+Take Cover! A flying Bat Eye is flying towards you! Choose to Fight or Flee. 20 Health Points+
+5 EXP Gained!
+5 Damage Given
+20 Health Points
+10
+Bat meat was dropped! 5 EXP Gained!
+M5
+Mummies 
+Watch out! Some Mummies are headed your way! Choose to Fight or Flee. 50 Health Points+
+10 EXP Gained!
+10 Damage Given
+50 Health Points
+40
+Cotton wrap was dropped! 10 EXP Gained!
+M6
+Mimic		
+Look twice, but don't be fooled! You have encountered a Mimic of a Treasure Chest! Choose to Fight or Flee. 50 Health Points+
+30 EXP Gained!
+20 Damage Given
+50 Health Points
+50
+Bandages and healing potion were dropped! 30 EXP Gained!
+M7
+Anubis Boss 
+You are close to the treasure! An Anubis Boss has reached your path! Choose to Fight or Flee. 500 Health Points+
+100 EXP Gained!
+40 Damage Given
+500 Health Points
+30
+Sword,shield,spear,and armor were dropped! 100 EXP Gained!
+M8
+Lizard Warrior 
+There's a Lizard Warrior a foot! Choose to Fight or Flee. 60 Health Points!
+30 EXP Gained!
+50 Damage Given
+60 Health Points
+20
+Swords and shield were dropped! 30 EXP Gained!
