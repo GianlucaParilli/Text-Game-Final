@@ -114,6 +114,20 @@ public class Controller {
 		temp.setOnAction(e -> {
 			monster.addObserver(LostTreasureMain.gui);
 			monster.ViewMonster(room.getCurrentRoom());
+			for(Rooms roomTemp : room.getRoomsArray()){
+				if (roomTemp.getRoomName().equals(dropdown)) {
+					if(roomTemp.getRoomName().equals(dropdown) && roomTemp.isSearched() == true)
+					{
+						System.out.println(roomTemp.isSearched() + "sss");
+						room.enableButtons(LostTreasureMain.gui.fightMonster);
+						room.enableButtons(LostTreasureMain.gui.fleeMonster);
+					} else 
+					{
+						System.out.println("Haven't Searched");
+					}
+				}
+				
+			}
 		});
 	}
 

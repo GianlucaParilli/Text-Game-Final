@@ -121,6 +121,8 @@ public class GUI extends Login implements Observer {
 		fightMonster =  new Button("Fight Monster");
 		fleeMonster = new Button("Flee Monster");
 		examineMonster.setDisable(true);
+		fightMonster.setDisable(true);
+		fleeMonster.setDisable(true);
 		hBox.getChildren().add(examineMonster);
 		hBox.getChildren().add(fightMonster);
 		hBox.getChildren().add(fleeMonster);
