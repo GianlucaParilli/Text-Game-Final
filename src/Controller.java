@@ -16,6 +16,7 @@ public class Controller {
 	Login login = new Login();
 	Items item = new Items();
 	Navigation nav = new Navigation();
+	Character character = new Character();
 	String dropdown;
 	boolean isLooted;
 
@@ -158,7 +159,8 @@ public class Controller {
 						{
 							roomTemp.setSearched(true);
 							System.out.println(roomTemp.isSearched() + "sss");
-							room.enableButtons(LostTreasureMain.gui.pickupItem);	
+							room.enableButtons(LostTreasureMain.gui.pickupItem);
+							room.enableButtons(LostTreasureMain.gui.examineMonster);
 						} else 
 						{
 							System.out.println("Already Looted");
@@ -213,6 +215,7 @@ public class Controller {
 					}
 					if (roomTemp.isSearched() == false) {
 						room.disableButton(LostTreasureMain.gui.pickupItem);
+						room.disableButton(LostTreasureMain.gui.examineMonster);
 					}
 
 				}
