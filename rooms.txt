@@ -13,7 +13,7 @@ Description: A small room that once served as a guards living quarters. There is
 r0, r2
 M1
 P1
-K1, W5
+W5
 0
 false
 r2
@@ -30,8 +30,8 @@ Guards Quarters C
 Description: A small room that once served as a guards living quarters. An feeble, rusty sword and shield hang on the wall.
 r0, r2, r4
 M1
-P1
-K1
+none
+none
 0
 false
 r4
@@ -39,8 +39,8 @@ Guards Quarters D
 Description: A small room that once served as a guards living quarters. A skeleton is sitting in a wooden chair collapsed over a wooden table. You notice something in its hand.
 r0, r3
 M1
-P1
-N1, K1
+none
+N1
 0
 false
 r5
@@ -48,8 +48,8 @@ Guards Quarters E
 Description: A small room that once served as a guards living quarters. A rat scurries through a small crack in the wall as you enter.
 r0, r6
 M1
-P1
-K1, H1
+none
+H1
 0
 false
 r6
@@ -57,8 +57,8 @@ Guards Quarters F
 Description: A small room that once served as a guards living quarters. There is a stone bed lined with rotten leather. The smell is almost unbearable. 
 r0, r5, r7
 M1
-P1
-K1, W5
+none
+W5
 0
 false
 r7
@@ -66,8 +66,8 @@ Guards Quarters G
 Description: A small room that once served as a guards living quarters. It seems like someone lit a fire in here. Everything is charred and covered in ash.
 r0, r06, r8
 M1
-P1
-K1
+none
+none
 0
 false
 r8
@@ -75,8 +75,8 @@ Guards Quarters H
 Description: A small room that once served as a guards living quarters. Rotten, unreadable papers cover the dusty, stone floor.
 r0, r7
 M1
-P1
-K1, H1
+none
+H1
 0
 false
 r9

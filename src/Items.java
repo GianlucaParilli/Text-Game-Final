@@ -27,23 +27,27 @@ public class Items extends Observable {
 	private String itemType;
 	private String itemUsage;
 	private String itemStrength;
-	private static ArrayList<Items> itemsArray = new ArrayList<>();
-	public static ArrayList<String> inventory = new ArrayList<>();
-	
+	private int availability;
+	private ArrayList<Items> itemsArray = new ArrayList<>();
+	private ArrayList<String> inventory = new ArrayList<>();
+	private ArrayList<String> keys = new ArrayList<>();
+	private ArrayList<String> keysID = new ArrayList<>();
 
-	public Items( String itemID, String itemName, String itemDescription, String itemType, String itemUsage, String itemStrength ){
+
+	public Items( String itemID, String itemName, String itemDescription, String itemType, String itemUsage, String itemStrength,  int availability){
 		this.itemID = itemID;
 		this.itemName = itemName;
 		this.itemDescription = itemDescription;
 		this.itemType = itemType;
 		this.itemUsage = itemUsage;
 		this.itemStrength = itemStrength;
-		
+		this.availability = availability;
 	}
 	
 	public Items() {
 		try {
 			itemsReader();
+			keys(itemsArray);
 		} catch (FileNotFoundException e) {
 			System.out.println("No File Found");
 		}
@@ -79,22 +83,21 @@ public class Items extends Observable {
 		popUp.getDialogPane().setContent(pop);
 		popUp.show();
 	}
-	public void equipItem() {
-		
-	}
-	
-	public void unequipItem() {
-		
-	}
-	
-	public void useItem() {
-		
-	}
 	
 	public boolean unlockDoor() {
 		return false;
 	}
+	public void keys(ArrayList<Items> keys) {
+		for(Items keyTemp : keys) {
+			if(keyTemp.itemType.equals("Key")) {
+				getKeys().add(keyTemp.itemName);
+				getKeysID().add(keyTemp.itemID);
+				//System.out.println(""+keyTemp.getItemName());
+				//System.out.println(""+keyTemp.getItemID());
 
+			}
+		}
+	}
 	public void setItemDescription(String itemDescription) {
 		this.itemDescription = itemDescription;
 		setChanged();
@@ -109,8 +112,8 @@ public class Items extends Observable {
 
 
 	public String viewItems(int currentRoom){
-		System.out.println(getitemsArray().get(currentRoom).getItemName());
-		setItemDescription(getitemsArray().get(currentRoom).getItemName());
+		System.out.println(getItemsArray().get(currentRoom).getItemName());
+		setItemDescription(getItemsArray().get(currentRoom).getItemName());
 		return itemDescription;
 	}
 
@@ -127,8 +130,9 @@ public class Items extends Observable {
 			String itemType = reader.nextLine();
 			String itemUsage = reader.nextLine();
 			String itemStrength = reader.nextLine();
-
-			Items items = new Items(itemID, itemName, itemDescription, itemType, itemUsage, itemStrength);
+			
+			int availability = 1;
+			Items items = new Items(itemID, itemName, itemDescription, itemType, itemUsage, itemStrength, availability);
 			itemsArray.add(items);
 		}
 	}
@@ -136,7 +140,7 @@ public class Items extends Observable {
 
 		return bool;
 	}
-	private ArrayList<Items> getitemsArray() {
+	public ArrayList<Items> getItemsArray() {
 		return itemsArray;
 	}
 
@@ -149,10 +153,18 @@ public class Items extends Observable {
 	}
 	
 
-	public  void setInventory(ArrayList<String> inventory) {
-		Items.inventory = inventory;
+	public ArrayList<String> getKeys() {
+		return keys;
+	}
+
+	public void setKeys(ArrayList<String> keys) {
+		this.keys = keys;
 	}
 	
+	public void setInventory(ArrayList<String> inventory) {
+		this.inventory = inventory;
+	}
+
 	public void setItemID(String itemID) {
 		this.itemID = itemID;
 	}
@@ -190,6 +202,30 @@ public class Items extends Observable {
 		return itemName;
 	}
 	
+	public ArrayList<String> getKeysID() {
+		return keysID;
+	}
+	
+
+	public int getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(int availability) {
+		this.availability = availability;
+	}
+	public void equipItem() {
+		
+	}
+	
+	public void unequipItem() {
+		
+	}
+	
+	public void useItem() {
+		
+	}
+
 	@Override
 	public String toString() {
 		return itemDescription;

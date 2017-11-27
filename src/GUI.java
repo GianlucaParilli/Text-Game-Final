@@ -120,7 +120,7 @@ public class GUI extends Login implements Observer {
 		examineMonster = new Button("Examine Monster");
 		fightMonster =  new Button("Fight Monster");
 		fleeMonster = new Button("Flee Monster");
-
+		examineMonster.setDisable(true);
 		hBox.getChildren().add(examineMonster);
 		hBox.getChildren().add(fightMonster);
 		hBox.getChildren().add(fleeMonster);
@@ -275,7 +275,7 @@ public class GUI extends Login implements Observer {
 		Text text = new Text("Select Room");
 		text.setFont(Font.font("Verdana", 20));
 		roomsDropDown = new ComboBox<>();
-		roomsDropDown.setEditable(true);
+		roomsDropDown.setEditable(false);
 
 		ArrayList<String> roomNameArray = new ArrayList<>();
 		//get name from array -- fix

@@ -91,7 +91,7 @@ none
 K3
 Right Half of an Ornate Skull
 Half of a decorative skull
-Key 
+Key
 Use with other half to unlock L2
 none
 K4

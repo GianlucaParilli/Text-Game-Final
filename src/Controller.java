@@ -66,12 +66,40 @@ public class Controller {
 		temp.setOnAction(e -> {
 			item.addObserver(LostTreasureMain.gui);
 			item.viewItems(room.getCurrentRoom());
+			String tempID;
 			for (Rooms roomTemp : room.getRoomsArray()) {
-				if (roomTemp.getRoomName().equals(dropdown) ) {
-					roomTemp.setLooted(true);
-					item.getInventory().add(item.getItemDescription());
+				if (roomTemp.getRoomName().equals(dropdown) ) {	
+					tempID = roomTemp.getItem();
+					for(Items item : item.getItemsArray()) {
+						if(item.getItemID().equals(tempID)) {
+							System.out.println("2" + item.getItemID());
+
+						}
+
+					}
+					
+					System.out.println("1" + roomTemp.getItem());
+
+					
+					
+					if(item.getItemsArray().get(0).getAvailability()>0) {
+						item.getItemsArray().get(roomTemp.getCurrentRoom()).setAvailability(0);
+						System.out.println("wo");
+						item.getInventory().add(item.getItemDescription());
+
+					}
+					else {
+						System.out.println("looteddddd");
+					}
+					
+				}
+				//unlocks room 9
+				if(roomTemp.getItem().equals("W5")) {//item.getKeysID().get(0))) {
+					room.getRoomsArray().get(9).setLocked(false);
+					//System.out.println(roomTemp.isLocked() + "  wwww");
 				}
 			}
+			
 
 		});
 	}
