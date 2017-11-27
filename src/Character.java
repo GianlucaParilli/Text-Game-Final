@@ -6,14 +6,27 @@ public class Character extends Observable{
 	public String charName;
 	public String charDescription;
 	public String charHealth;
+	public String charDamage;
 	
-	public Character(String charID, String charName, String charDescription, String charHealth){
+	public Character(String charID, String charName, String charDescription, String charHealth, String charDamage){
 		
 		this.charID = charID;
 		this.charName = charName;
 		this.charDescription = charDescription;
 		this.charHealth = charHealth;
-				
+		this.charDamage = charDamage;
+	}
+	
+	public Character() {
+		
+	}
+
+	public String getCharDamage() {
+		return charDamage;
+	}
+
+	public void setCharDamage(String charDamage) {
+		this.charDamage = charDamage;
 	}
 
 	public String getCharID() {
@@ -47,5 +60,6 @@ public class Character extends Observable{
 	public void setCharHealth(String charHealth) {
 		this.charHealth = charHealth;
 	}
+	
 
 }
