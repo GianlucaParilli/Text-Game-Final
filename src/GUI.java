@@ -285,7 +285,7 @@ public class GUI extends Login implements Observer {
 
 		ArrayList<String> roomNameArray = new ArrayList<>();
 		//get name from array -- fix
-		for(int i = 1; i<9;i++){
+		for(int i = 1; i<10;i++){
 			roomNameArray.add(room.getRoomsArray().get(i).getRoomName());
 		}
 		

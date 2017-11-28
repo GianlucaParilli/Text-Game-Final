@@ -17,13 +17,12 @@ public class Monster extends Observable {
 	private String fleeMonster;
 	private int currentRoom = 0;
 	private int currentMonster;
+	private String currentMonsterName;
 	private static ArrayList<Monster> monstersArray = new ArrayList<>();
   
 	public Monster() {
 		try {
-			
 			monsterReader();
-		
 			
 		} catch(FileNotFoundException e){
 			System.out.println("No File Found");
@@ -57,8 +56,10 @@ public class Monster extends Observable {
 	}
 	
 	public String ViewMonster(int currentRoom) {
-		System.out.println(currentRoom);
-			setMonsterDescription(getMonstersArray().get(getCurrentMonster()).getMonsterID());
+		System.out.println("mmmaaa "+ getCurrentMonsterName());
+		System.out.println("setter " + getMonstersArray().get(currentMonster(getCurrentMonsterName())).getMonsterName());
+		setMonsterDescription("You have encountered a " + getCurrentMonsterName() + "\n\n\n" + "Wanna fight it?"
+							 + "\n\n" + "Wanna Flee?");
 		return monsterDescription;
 		
 	}
@@ -104,6 +105,7 @@ public class Monster extends Observable {
 			if(m.getMonsterID().equals(monsterID)) {
 				currentID = getMonstersArray().indexOf(m);
 				System.out.println("current monster " + m.getMonsterName());
+				setCurrentMonsterName((m.getMonsterName()));
 
 			}
 		}
@@ -111,6 +113,23 @@ public class Monster extends Observable {
 
 		return currentID;
 	}
+/*	public String currentMonsterName(String monsterID) {
+		int currentID=0;
+		String currentName="";
+		//System.out.println("monsters position " +getMonstersArray().get(0));
+		for(Monster m : getMonstersArray()) {
+			if(m.getMonsterID().equals(monsterID)) {
+				currentID = getMonstersArray().indexOf(m);
+				System.out.println("current monster " + m.getMonsterName());
+				
+			currentName = m.getMonsterName();
+
+			}
+		}
+		System.out.println("current monster namwww " + currentName);
+
+		return currentName;
+	}*/
 	/*public void fleeMonster() {
 		 System.out.println("You have fled the monster, no experience gained");
 	}
@@ -223,5 +242,14 @@ public class Monster extends Observable {
 	public ArrayList<Monster> getMonstersArray() {
 		return monstersArray;
 	}
+
+	public String getCurrentMonsterName() {
+		return currentMonsterName;
+	}
+
+	public void setCurrentMonsterName(String currentMonsterName) {
+		this.currentMonsterName = currentMonsterName;
+	}
+	
 	
 }
