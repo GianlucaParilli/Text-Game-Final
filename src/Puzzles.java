@@ -146,6 +146,7 @@ public class Puzzles extends Observable {
 			getPuzzlesAnswerArray().add(pz.getPuzzleAnswer());
 		}
 	}
+	//d
 	public String getPuzzleID() {
 		return puzzleID;
 	}
