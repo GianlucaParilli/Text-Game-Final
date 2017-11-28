@@ -131,6 +131,7 @@ public class Controller {
 						System.out.println(roomTemp.isSearched() + "sss");
 						room.enableButtons(LostTreasureMain.gui.fightMonster);
 						room.enableButtons(LostTreasureMain.gui.fleeMonster);
+						monster.setCurrentMonster(roomTemp.getMonster());
 					} else 
 					{
 						System.out.println("Haven't Searched");

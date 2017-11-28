@@ -16,12 +16,12 @@ public class Monster extends Observable {
 	private String artifactsDropped;
 	private String fleeMonster;
 	private int currentRoom = 0;
+	private int currentMonster;
 	private static ArrayList<Monster> monstersArray = new ArrayList<>();
 	
 	public Monster() {
 		try {
 			monsterReader();
-			//ViewMonster();
 			
 		} catch(FileNotFoundException e){
 			System.out.println("No File Found");
@@ -55,7 +55,7 @@ public class Monster extends Observable {
 	
 	public String ViewMonster(int currentRoom) {
 		System.out.println(currentRoom);
-			setMonsterDescription(getMonstersArray().get(currentRoom).getMonsterDescription());
+			setMonsterDescription(getMonstersArray().get(getCurrentMonster()).getMonsterID());
 		return monsterDescription;
 		
 	}
@@ -73,7 +73,9 @@ public class Monster extends Observable {
 	
 	public String AttackMonster(int currentRoom){
 		System.out.println(currentRoom);
-		setAttackPercentage(getMonstersArray().get(currentRoom).getArtifactsDropped());
+	//	setAttackPercentage(getMonstersArray().get(currentRoom).getArtifactsDropped());
+		getMonstersArray().get(currentMonster).getHealthPoints();
+
 		return attackPercentage;
 	
 	
@@ -188,6 +190,14 @@ public class Monster extends Observable {
 		return fleeMonster;
 	}
 
+	public int getCurrentMonster() {
+		return currentMonster;
+	}
+	
+	public void setCurrentMonster(int currentMonster) {
+		this.currentMonster = currentMonster;
+		
+	}
 	
 	public ArrayList<Monster> getMonstersArray() {
 		return monstersArray;
