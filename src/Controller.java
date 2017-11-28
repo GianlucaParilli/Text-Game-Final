@@ -1,11 +1,4 @@
-import java.util.ArrayList;
-
-import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.VBox;
 
 public class Controller {
 	// Monster monster;
@@ -131,6 +124,8 @@ public class Controller {
 					if(roomTemp.getRoomName().equals(dropdown) && roomTemp.isSearched() == true)
 					{
 						//System.out.println(roomTemp.isSearched() + "sss");
+						System.out.println("sssmmm" + monster.currentMonster(roomTemp.getMonster()));
+
 						room.enableButtons(LostTreasureMain.gui.fightMonster);
 						room.enableButtons(LostTreasureMain.gui.fleeMonster);
 						//monster.setCurrentMonster(roomTemp.getMonster());

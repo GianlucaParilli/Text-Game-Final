@@ -18,21 +18,24 @@ public class Monster extends Observable {
 	private int currentRoom = 0;
 	private int currentMonster;
 	private static ArrayList<Monster> monstersArray = new ArrayList<>();
-	
+  
 	public Monster() {
 		try {
+			
 			monsterReader();
+		
 			
 		} catch(FileNotFoundException e){
 			System.out.println("No File Found");
 		}
 	}
 
-	public Monster(String monsterID, String monsterName, String monsterDescription,
+	public Monster(String monsterID, int currentMonster, String monsterName, String monsterDescription,
 			String EXP, String damageGiven, String healthPoints, String attackPercentage, 
 			String artifactsDropped)
 	{
 		this.monsterID = monsterID;
+		this.currentMonster = currentMonster;
 		this.monsterName = monsterName;
 		this.monsterDescription = monsterDescription;
 		this.EXP = EXP;
@@ -94,7 +97,19 @@ public class Monster extends Observable {
 		return EXP;
 		
 	}
-	
+	public int currentMonster(String monsterID) {
+		int currentID=0;
+		//System.out.println("monsters position " +getMonstersArray().get(0));
+		for(Monster m : getMonstersArray()) {
+			if(m.getMonsterID().equals(monsterID)) {
+				currentID = getMonstersArray().indexOf(m);
+				System.out.println("current monster position " + currentID);
+				System.out.println("current monster " + m.getMonsterName());
+
+			}
+		}
+		return currentID;
+	}
 	/*public void fleeMonster() {
 		 System.out.println("You have fled the monster, no experience gained");
 	}
@@ -107,6 +122,11 @@ public class Monster extends Observable {
 
 		while(reader.hasNext()){
 			String monsterID = reader.nextLine();
+			//
+			//
+			String digits = monsterID.replaceAll("[^0-9.]","");
+
+			int currentMonster = Integer.parseInt(digits);
 			String monsterName = reader.nextLine();
 			String monsterDescription= reader.nextLine();
 			String EXP = reader.nextLine();
@@ -115,7 +135,7 @@ public class Monster extends Observable {
 			String attackPercentage = reader.nextLine();
 			String artifactsDropped = reader.nextLine();
 
-			Monster monster = new Monster( monsterID, monsterName, monsterDescription, EXP, 
+			Monster monster = new Monster( monsterID, currentMonster, monsterName, monsterDescription, EXP, 
 					damageGiven, healthPoints, attackPercentage, artifactsDropped);
 			monstersArray.add(monster);
 		}
