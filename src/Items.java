@@ -111,17 +111,19 @@ public class Items extends Observable {
 	}
 
 
-	public String viewItems(int currentRoom){
-		System.out.println(getItemsArray().get(currentRoom).getItemName());
-		setItemDescription(getItemsArray().get(currentRoom).getItemName());
-		return itemDescription;
+	public void viewItems(String itemID){
+		//System.out.println(getItemsArray().get(currentRoom).getItemName());
+		setItemDescription(getItemsArray().get(currentItem(itemID)).getItemName());
+		//return itemDescription;
 	}
 
 	public int currentItem(String itemID) {
-		int currentID = 0;
+		int currentID=0;
+		System.out.println(getItemsArray().get(1));
 		for(Items temp : getItemsArray()) {
-			if(itemID.equals(temp.getItemID())) {
+			if(temp.getItemID().equals(itemID)) {
 				currentID = getItemsArray().indexOf(temp);
+				System.out.println("current item position " + currentID);
 			}
 		}
 		return currentID;

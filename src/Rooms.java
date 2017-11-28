@@ -182,7 +182,7 @@ public class Rooms extends Observable {
 		}	
 	}
 
-	public void loadPopUp(String lockedRoom) {
+	public void lockedPopUp(String lockedRoom) {
 		Alert errorPopUp = new Alert(AlertType.ERROR);
 		errorPopUp.setHeaderText("The Room " + lockedRoom + " is locked");
 		errorPopUp.show();

@@ -76,7 +76,7 @@ Large Backpack
 Storage
 Large backpack to carry items
 none
-K1 
+K1
 Gold Star
 Star shaped object made of gold
 Key
