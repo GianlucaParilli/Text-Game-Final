@@ -71,7 +71,7 @@ public class Rooms extends Observable {
 	}
 
 	public String ExamineRoom() { //Placeholder
-		randomPuzzle();
+		//randomPuzzle();
 		setRoomDescription(getRoomsArray().get(getCurrentRoom()).getRoomDescription());
 		//System.out.println(roomDescription);
 

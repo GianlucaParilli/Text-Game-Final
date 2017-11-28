@@ -285,12 +285,18 @@ public class GUI extends Login implements Observer {
 
 		ArrayList<String> roomNameArray = new ArrayList<>();
 		//get name from array -- fix
-		for(Rooms temp : room.getRoomsArray()){
-			roomNameArray.add(temp.getRoomName());
+		for(int i = 1; i<9;i++){
+			roomNameArray.add(room.getRoomsArray().get(i).getRoomName());
 		}
-
+		
 		roomsDropDown.getItems().addAll(roomNameArray);
 		roomsDropDown.setPromptText("Entrance Hall");
+		
+		if(room.getCurrentRoom()==0) {
+			room.setCurrentRoom(room.getNumRoomID());				
+			room.enableButtons(LostTreasureMain.gui.searchRoom);
+			
+		}
 		hBox.getChildren().add(text);
 		hBox.getChildren().add(roomsDropDown);
 		hBox.getChildren().add(goButton);

@@ -103,11 +103,12 @@ public class Monster extends Observable {
 		for(Monster m : getMonstersArray()) {
 			if(m.getMonsterID().equals(monsterID)) {
 				currentID = getMonstersArray().indexOf(m);
-				System.out.println("current monster position " + currentID);
 				System.out.println("current monster " + m.getMonsterName());
 
 			}
 		}
+		System.out.println("current monster position " + currentID);
+
 		return currentID;
 	}
 	/*public void fleeMonster() {

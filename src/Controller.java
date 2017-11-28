@@ -12,7 +12,6 @@ public class Controller {
 	Character character = new Character();
 	String dropdown;
 	boolean isLooted;
-	int clicked = 0;
 
 	public void newGameListener(Button button) {
 		button.setOnAction(e -> {
@@ -48,7 +47,7 @@ public class Controller {
 	}
 	public void examineRoomListener(Button temp) {
 		// System.out.println("examine room");
-		temp.setId("r" + room.getRoomID());
+		//temp.setId("r" + room.getRoomID());
 
 		temp.setOnAction(e -> {
 			room.addObserver(LostTreasureMain.gui);
@@ -123,7 +122,7 @@ public class Controller {
 				if (roomTemp.getRoomName().equals(dropdown)) {
 					if(roomTemp.getRoomName().equals(dropdown) && roomTemp.isSearched() == true)
 					{
-						//System.out.println(roomTemp.isSearched() + "sss");
+						System.out.println("current room monster id " + roomTemp.getMonster());
 						System.out.println("sssmmm" + monster.currentMonster(roomTemp.getMonster()));
 
 						room.enableButtons(LostTreasureMain.gui.fightMonster);
