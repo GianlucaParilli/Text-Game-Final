@@ -5,6 +5,16 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
 
+import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+
 public class Puzzles extends Observable {
 
 	private String puzzleID;
@@ -12,10 +22,12 @@ public class Puzzles extends Observable {
 	private String puzzleAnswer;
 	private String puzzleHint;
 	private static ArrayList<Puzzles> puzzlesArray = new ArrayList<>();
+	//private ArrayList<> puzzles = new ArrayList<>();
 
 	public Puzzles() {
 		try {
 			puzzleReader();
+			
 
 		} catch(FileNotFoundException e){
 			System.out.println("No File Found");
@@ -29,6 +41,41 @@ public class Puzzles extends Observable {
 		this.puzzleAnswer = puzzleAnswer;
 		this.puzzleHint = puzzleHint;
 
+	}
+
+	public void puzzlePopUp(ArrayList<String> puzzleArray) {
+		Alert popUp = new Alert(AlertType.INFORMATION);
+		popUp.setTitle("Inventory");
+		popUp.setHeaderText("Select an item");
+		ImageView logo = new ImageView("logo.png");
+		logo.setFitWidth(64);
+	    logo.setFitHeight(64);
+		popUp.setGraphic(logo);
+		VBox pop = new VBox();
+		pop.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
+				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
+		pop.setPadding(new Insets(50, 50, 50, 50));
+		RadioButton cb; 
+		RadioButton egg;
+		ToggleGroup toggleGroup = new ToggleGroup();
+
+		for (Puzzles temp : puzzlesArray) {
+			cb = new RadioButton(temp.getPuzzleAnswer());
+			egg = new RadioButton(temp.getPuzzleAnswer());
+			cb.setFont(Font.font("Verdana", 16));
+
+			cb.setToggleGroup(toggleGroup);
+			pop.getChildren().add(egg);
+			System.out.println(puzzleArray.get(0));
+			if (temp.equals(egg.getText())) {
+				pop.getChildren().add(cb);
+				egg.setOnAction(e -> {
+					System.out.println("wrong");
+				});
+			}
+		}
+		popUp.getDialogPane().setContent(pop);
+		popUp.show();
 	}
 
 	public void setPuzzleDescription(String puzzleDescription) {
@@ -109,6 +156,7 @@ public class Puzzles extends Observable {
 	}
 
 	public String getPuzzleHint() {
+	
 		return puzzleHint;
 	}
 

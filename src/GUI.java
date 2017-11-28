@@ -136,41 +136,8 @@ public class GUI extends Login implements Observer {
 		return hBox;
 	}
 
-
-
-	private HBox puzzleButtonHPane() {
-		HBox hBox = new HBox(5);
-		hBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
-				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
-
-		viewPuzzle = new Button("View Puzzle");
-		answerPuzzle = new Button("Answer Puzzle");
-		hintPuzzle =  new Button("View Hint");
-
-		hBox.getChildren().add(viewPuzzle);
-		hBox.getChildren().add(answerPuzzle);
-		hBox.getChildren().add(hintPuzzle);
-
-		control.viewPuzzleListener(viewPuzzle);
-		control.viewHintListener(hintPuzzle);
-		control.viewAnswerListener(answerPuzzle);
-
-		answerPuzzle.setOnAction(e -> {
-			
-			Alert popUp = new Alert(AlertType.CONFIRMATION);
-			popUp.getDialogPane().setContent(puzzlePopUpPane());
-			popUp.setTitle("Answer Puzzle");
-			
-			Optional<ButtonType> result = popUp.showAndWait();
-			ButtonType button = result.orElse(ButtonType.CANCEL);
-			
-		});
-			
-		
-		return hBox;
-	}
 	
-	private VBox puzzlePopUpPane() {
+	/*private VBox puzzlePopUpPane(ArrayList<String> puzzlesArray) {
 		VBox vBox = new VBox();
 		HBox hBox1 = new HBox(15);
 		HBox hBox2 = new HBox(30);
@@ -191,17 +158,34 @@ public class GUI extends Login implements Observer {
 		hBox2.getChildren().add(TreesButton );
 		hBox2.getChildren().add(FlowersButton);
 		hBox2.getChildren().add(MountainButton);
-		ToggleGroup toggleGroup = new ToggleGroup();;
+		
+		RadioButton cb; 
+		RadioButton StarsButton;
+		RadioButton TreesButton;
+		RadioButton FlowersButton;
+		RadioButton MountainButton;
+		ToggleGroup toggleGroup = new ToggleGroup();
+
+		for (String temp : puzzlesArray) {
+			cb = new RadioButton(temp);
+			cb.setFont(Font.font("Verdana", 16));
+
+			cb.setToggleGroup(toggleGroup);
+			vBox.getChildren().add(cb);
+			if (temp.equals(cb.getText())) {
+				cb.setOnAction(e -> {
+					System.out.println(temp);
+				});
+			}
+		}
 
 		StarsButton.setToggleGroup(toggleGroup);
 		TreesButton.setToggleGroup(toggleGroup);
 		FlowersButton.setToggleGroup(toggleGroup);
 		MountainButton.setToggleGroup(toggleGroup);
 		
-		MountainButton.setOnAction(e -> {
-			LostTreasureMain.gui.descriptionText.setText("correct!");
 		
-		});
+		//});
 	
 		
 				
@@ -209,6 +193,36 @@ public class GUI extends Login implements Observer {
 	
 		return vBox;
 
+	}*/
+
+
+	private HBox puzzleButtonHPane() {
+		HBox hBox = new HBox(5);
+		hBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
+				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
+
+		viewPuzzle = new Button("View Puzzle");
+		answerPuzzle = new Button("Answer Puzzle");
+		hintPuzzle =  new Button("View Hint");
+
+		hBox.getChildren().add(viewPuzzle);
+		hBox.getChildren().add(answerPuzzle);
+		hBox.getChildren().add(hintPuzzle);
+
+		control.viewPuzzleListener(viewPuzzle);
+		control.viewHintListener(hintPuzzle);
+		control.viewAnswerListener(answerPuzzle);
+		
+		control.showPuzzleListener(answerPuzzle);
+		
+
+		//answerPuzzle.setOnAction(e -> {
+		
+			
+		//});
+			
+		
+		return hBox;
 	}
 
 	private HBox descriptionPane() {

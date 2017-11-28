@@ -27,19 +27,21 @@ public class Items extends Observable {
 	private String itemType;
 	private String itemUsage;
 	private String itemStrength;
+	private int availability;
 	private ArrayList<Items> itemsArray = new ArrayList<>();
 	private ArrayList<String> inventory = new ArrayList<>();
 	private ArrayList<String> keys = new ArrayList<>();
 	private ArrayList<String> keysID = new ArrayList<>();
 
 
-	public Items( String itemID, String itemName, String itemDescription, String itemType, String itemUsage, String itemStrength){
+	public Items( String itemID, String itemName, String itemDescription, String itemType, String itemUsage, String itemStrength,  int availability){
 		this.itemID = itemID;
 		this.itemName = itemName;
 		this.itemDescription = itemDescription;
 		this.itemType = itemType;
 		this.itemUsage = itemUsage;
 		this.itemStrength = itemStrength;
+		this.availability = availability;
 	}
 	
 	public Items() {
@@ -130,7 +132,7 @@ public class Items extends Observable {
 			String itemStrength = reader.nextLine();
 			
 			int availability = 1;
-			Items items = new Items(itemID, itemName, itemDescription, itemType, itemUsage, itemStrength);
+			Items items = new Items(itemID, itemName, itemDescription, itemType, itemUsage, itemStrength, availability);
 			itemsArray.add(items);
 		}
 	}
@@ -205,7 +207,13 @@ public class Items extends Observable {
 	}
 	
 
+	public int getAvailability() {
+		return availability;
+	}
 
+	public void setAvailability(int availability) {
+		this.availability = availability;
+	}
 	public void equipItem() {
 		
 	}

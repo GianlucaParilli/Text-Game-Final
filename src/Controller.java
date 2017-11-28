@@ -19,6 +19,7 @@ public class Controller {
 	Character character = new Character();
 	String dropdown;
 	boolean isLooted;
+	int clicked = 0;
 
 	public void newGameListener(Button button) {
 		button.setOnAction(e -> {
@@ -45,6 +46,13 @@ public class Controller {
 		});
 	}
 
+	public void showPuzzleListener(Button button){
+		button.setOnAction(e ->{
+			
+			puzzle.puzzlePopUp(puzzle.getPuzzles());
+			
+		});
+	}
 	public void examineRoomListener(Button temp) {
 		// System.out.println("examine room");
 		temp.setId("r" + room.getRoomID());
@@ -153,14 +161,16 @@ public class Controller {
 			});
 		}
 		public void attackMonsterListener(Button attack) {
-			attack.setOnAction(e->{
+		attack.setOnAction(e->{
 				System.out.println("you have attacked the monster");
 				monster.addObserver(LostTreasureMain.gui);
 				monster.AttackMonster(room.getCurrentRoom());
+		
 				
-				
+			
 			});
-		}
+			}
+		
 
 		public void searchRoomListener(Button temp){
 			temp.setId(item.getItemDescription());
@@ -173,8 +183,16 @@ public class Controller {
 						{
 							roomTemp.setSearched(true);
 							System.out.println(roomTemp.isSearched() + "sss");
+
 							room.enableButtons(LostTreasureMain.gui.pickupItem);
 							room.enableButtons(LostTreasureMain.gui.examineMonster);
+
+							room.enableButtons(LostTreasureMain.gui.pickupItem);	
+							room.enableButtons(LostTreasureMain.gui.examineMonster);
+							room.enableButtons(LostTreasureMain.gui.fightMonster);	
+							room.enableButtons(LostTreasureMain.gui.fleeMonster);
+							
+
 						} else 
 						{
 							System.out.println("Already Looted");
