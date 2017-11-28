@@ -49,7 +49,7 @@ public class Controller {
 	public void showPuzzleListener(Button button){
 		button.setOnAction(e ->{
 			
-			puzzle.puzzlePopUp(puzzle.getPuzzles());
+			puzzle.puzzlePopUp(puzzle.getPuzzlesAnswerArray());
 			
 		});
 	}
@@ -99,8 +99,10 @@ public class Controller {
 				}
 				//unlocks room 9
 				if(roomTemp.getItem().equals("W5")) {//item.getKeysID().get(0))) {
-					room.getRoomsArray().get(9).setLocked(false);
-					//System.out.println(roomTemp.isLocked() + "  wwww");
+					room.getRoomsArray().get(9).setLocked(true);
+					System.out.println(roomTemp.isLocked() + "  wwww");
+					//room.loadPopUp(roomTemp.getRoomName());
+
 				}
 			}
 			
@@ -177,8 +179,11 @@ public class Controller {
 			temp.setOnAction(e -> {
 				item.addObserver(LostTreasureMain.gui);
 				item.viewItems(room.getCurrentRoom());
+				System.out.println("current "+room.getCurrentRoom());
+				
 				for(Rooms roomTemp : room.getRoomsArray()){
 					if (roomTemp.getRoomName().equals(dropdown)) {
+						
 						if(roomTemp.getRoomName().equals(dropdown) && roomTemp.isLooted() == false)
 						{
 							roomTemp.setSearched(true);
@@ -231,6 +236,7 @@ public class Controller {
 
 						break;
 					}
+
 					nav.setCurrentRoom(roomTemp.getNumRoomID());
 					nav.refreshMap(roomTemp.getNumRoomID());
 					room.setCurrentRoom(roomTemp.getNumRoomID());
@@ -238,7 +244,7 @@ public class Controller {
 					room.availableRoom(room.getCurrentRoom());// calls the available room method wit the room number
 																// that user went to
 					// GUI.gui.getRoomsDropDown().getItems().addAll(roomTemp.getRoomIDArray());
-					// System.out.println("is the room locked? " + roomTemp.isLocked());
+					System.out.println("is the room locked? " + roomTemp.isLocked());
 					System.out.println("is the room examined? " + roomTemp.isExamined());
 					room.enableButtons(LostTreasureMain.gui.examine);
 

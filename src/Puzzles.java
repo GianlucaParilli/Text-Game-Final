@@ -22,12 +22,14 @@ public class Puzzles extends Observable {
 	private String puzzleAnswer;
 	private String puzzleHint;
 	private static ArrayList<Puzzles> puzzlesArray = new ArrayList<>();
+	private static ArrayList<String> puzzlesAnswerArray = new ArrayList<>();
+
 	//private ArrayList<> puzzles = new ArrayList<>();
 
 	public Puzzles() {
 		try {
 			puzzleReader();
-			
+			puzzleAnswers(getPuzzlesArray());
 
 		} catch(FileNotFoundException e){
 			System.out.println("No File Found");
@@ -59,18 +61,19 @@ public class Puzzles extends Observable {
 		RadioButton egg;
 		ToggleGroup toggleGroup = new ToggleGroup();
 
-		for (Puzzles temp : puzzlesArray) {
-			cb = new RadioButton(temp.getPuzzleAnswer());
-			egg = new RadioButton(temp.getPuzzleAnswer());
-			cb.setFont(Font.font("Verdana", 16));
+		for (String temp : puzzleArray) {
+			System.out.println("h"+temp);
+			//cb = new RadioButton(temp.getPuzzleAnswer());
+			egg = new RadioButton("  "+temp);
+			//cb.setFont(Font.font("Verdana", 16));
 
-			cb.setToggleGroup(toggleGroup);
+			egg.setToggleGroup(toggleGroup);
 			pop.getChildren().add(egg);
-			System.out.println(puzzleArray.get(0));
-			if (temp.equals(egg.getText())) {
-				pop.getChildren().add(cb);
+			//System.out.println(puzzleArray.get(0));
+			if (puzzlesArray.get(0).getPuzzleAnswer().equals("Mountain")) {
+				//pop.getChildren().add(cb);
 				egg.setOnAction(e -> {
-					System.out.println("wrong");
+					//System.out.println("wrong");
 				});
 			}
 		}
@@ -120,7 +123,6 @@ public class Puzzles extends Observable {
 	public void puzzleReader() throws FileNotFoundException {
 		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(new File("puzzle.txt"));
-		;
 
 		while(reader.hasNext()){
 
@@ -139,7 +141,11 @@ public class Puzzles extends Observable {
 	public String toString() {
 		return puzzleID + " | " + puzzleDescription + " | " + puzzleAnswer + " | " + puzzleHint + " | ";
 	}
-
+	public void puzzleAnswers(ArrayList<Puzzles>temp) {
+		for(Puzzles pz : temp) {
+			getPuzzlesAnswerArray().add(pz.getPuzzleAnswer());
+		}
+	}
 	public String getPuzzleID() {
 		return puzzleID;
 	}
@@ -162,6 +168,14 @@ public class Puzzles extends Observable {
 
 	public ArrayList<Puzzles> getPuzzlesArray() {
 		return puzzlesArray;
+	}
+
+	public  ArrayList<String> getPuzzlesAnswerArray() {
+		return puzzlesAnswerArray;
+	}
+
+	public void setPuzzlesAnswerArray(ArrayList<String> puzzlesAnswerArray) {
+		Puzzles.puzzlesAnswerArray = puzzlesAnswerArray;
 	}
 
 

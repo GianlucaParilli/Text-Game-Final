@@ -117,7 +117,15 @@ public class Items extends Observable {
 		return itemDescription;
 	}
 
-
+	public int currentItem(String itemID) {
+		int currentID = 0;
+		for(Items temp : getItemsArray()) {
+			if(itemID.equals(temp.getItemID())) {
+				currentID = getItemsArray().indexOf(temp);
+			}
+		}
+		return currentID;
+	}
 	public void itemsReader() throws FileNotFoundException {
 		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(new File("artifact.txt"));
