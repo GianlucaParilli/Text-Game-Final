@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class GUI extends Login implements Observer {
 	Button examine, goButton, searchRoom, fightMonster, 
-	fleeMonster, examineMonster, viewPuzzle, answerPuzzle, pickupItem, hintPuzzle;
+	fleeMonster, examineMonster, viewPuzzle, answerPuzzle, pickupItem, hintPuzzle, exitPuzzle;
 	static Stage guiStage = new Stage();
 	static Stage inventoryStage = new Stage();
 	Label descriptionText;

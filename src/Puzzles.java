@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
@@ -80,7 +82,48 @@ public class Puzzles extends Observable {
 		popUp.getDialogPane().setContent(pop);
 		popUp.show();
 	}
+	public void puzzlePopUp(Button answer, Button hint, Button exit, Rooms room) {
+		Alert popUp = new Alert(AlertType.NONE);
+		popUp.setTitle("Puzzle");
+		popUp.setHeaderText("Puzzle");
+		ImageView logo = new ImageView("logo.png");
+		logo.setFitWidth(64);
+	    logo.setFitHeight(64);
+		popUp.setGraphic(logo);
+		VBox pop = new VBox();
+		pop.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
+				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
+		pop.setPadding(new Insets(50, 50, 50, 50));
+		answer = new Button("answer");
+		hint = new Button("hint");	
+		exit = new Button("Exit Puzzle");
+		
+		popUp.getButtonTypes().add(ButtonType.CANCEL);
+		popUp.hide();
+		popUp.getButtonTypes().remove(ButtonType.CANCEL);
 
+		answer.setOnAction(e->{
+			System.out.println("answer");
+			addObserver(LostTreasureMain.gui);
+			ViewPuzzle(room.getCurrentRoom());
+		});
+		exit.setOnAction(e -> {
+			addObserver(LostTreasureMain.gui);
+			//FleeMonster(room.getCurrentRoom());
+			// quits and closes the gui
+			popUp.close();
+			System.out.println("exit");
+
+		});
+		
+		pop.getChildren().add(answer);
+		pop.getChildren().add(hint);
+		pop.getChildren().add(exit);
+		popUp.getDialogPane().setContent(pop);
+		popUp.show();
+		
+	
+	}
 	public void setPuzzleDescription(String puzzleDescription) {
 		this.puzzleDescription = puzzleDescription;
 		setChanged();

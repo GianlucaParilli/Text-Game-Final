@@ -105,9 +105,12 @@ public class Controller {
 	public void viewPuzzleListener(Button temp) {
 		temp.setId(puzzle.getPuzzleDescription());
 		temp.setOnAction(e -> {
-			puzzle.addObserver(LostTreasureMain.gui);
-			puzzle.ViewPuzzle(room.getCurrentRoom());
-
+			//puzzle.addObserver(LostTreasureMain.gui);
+			//puzzle.ViewPuzzle(room.getCurrentRoom());
+			
+			//go to puzzle pop up for the buttons listeners
+			puzzle.puzzlePopUp(LostTreasureMain.gui.answerPuzzle, LostTreasureMain.gui.hintPuzzle,
+							   LostTreasureMain.gui.exitPuzzle, room);
 		});
 	}
 
