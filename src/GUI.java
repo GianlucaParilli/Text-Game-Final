@@ -56,7 +56,7 @@ public class GUI extends Login implements Observer {
 		primaryStage.setTitle("The Lost treasure"); // Set the stage title
 		primaryStage.setScene(scene); // Place the scene in the stage
 		primaryStage.setWidth(1040);
-		primaryStage.setHeight(710);
+		primaryStage.setHeight(585);
 		primaryStage.show(); // Display the stage
 	}
 
@@ -67,8 +67,8 @@ public class GUI extends Login implements Observer {
 		pane.add(mapPane(), 0, 0);
 		pane.add(descriptionPane(), 1, 0);
 		pane.add(roomButtonHPane(), 1, 2);
-		pane.add(monsterButtonHPane(), 1, 3);
-		pane.add(puzzleButtonHPane(), 1, 4);
+		//pane.add(monsterButtonHPane(), 1, 3);
+		//pane.add(puzzleButtonHPane(), 1, 4);
 		pane.add(navButtonPane(), 1, 1);
 		pane.add(inventoryPane(), 0, 1);
 		pane.add(healthPane(), 0, 2);
@@ -88,44 +88,26 @@ public class GUI extends Login implements Observer {
 				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
 		searchRoom =  new Button("Search Room");
 		examine = new Button("Examine Room");
+		examineMonster = new Button("Examine Monster");
+		viewPuzzle = new Button("View Puzzle");
 		pickupItem = new Button("Pickup Item");
 		searchRoom.setDisable(true);
 		pickupItem.setDisable(true);
 		hBox.getChildren().add(examine);
 		hBox.getChildren().add(searchRoom);
+		hBox.getChildren().add(examineMonster);
+		hBox.getChildren().add(viewPuzzle);
 		hBox.getChildren().add(pickupItem);
 		//adding the action listener from the controller class
 		control.examineRoomListener(examine);
 		control.searchRoomListener(searchRoom);
 		control.pickupItemListener(pickupItem);
-
-		return hBox;
-	}
-
-	private HBox monsterButtonHPane() {
-		HBox hBox = new HBox(5);
-		hBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
-				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
-
-		examineMonster = new Button("Examine Monster");
-		fightMonster =  new Button("Fight Monster");
-		fleeMonster = new Button("Flee Monster");
-		examineMonster.setDisable(true);
-		fightMonster.setDisable(true);
-		fleeMonster.setDisable(true);
-		hBox.getChildren().add(examineMonster);
-		hBox.getChildren().add(fightMonster);
-		hBox.getChildren().add(fleeMonster);
-
-		// adds the listener to the button
 		control.viewMonsterListener(examineMonster);
-		control.fleeMonsterListener(fleeMonster);
-		control.attackMonsterListener(fightMonster);
-		//System.out.println();
+		control.viewPuzzleListener(viewPuzzle);
+
 
 		return hBox;
 	}
-
 	
 	/*private VBox puzzlePopUpPane(ArrayList<String> puzzlesArray) {
 		VBox vBox = new VBox();
@@ -172,13 +154,8 @@ public class GUI extends Login implements Observer {
 		StarsButton.setToggleGroup(toggleGroup);
 		TreesButton.setToggleGroup(toggleGroup);
 		FlowersButton.setToggleGroup(toggleGroup);
-		MountainButton.setToggleGroup(toggleGroup);
-		
-		
-		//});
-	
-		
-				
+		MountainButton.setToggleGroup(toggleGroup);	
+		//});			
 		vBox.getChildren().add(hBox2);
 	
 		return vBox;
@@ -186,34 +163,7 @@ public class GUI extends Login implements Observer {
 	}*/
 
 
-	private HBox puzzleButtonHPane() {
-		HBox hBox = new HBox(5);
-		hBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
-				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
 
-		viewPuzzle = new Button("View Puzzle");
-		answerPuzzle = new Button("Answer Puzzle");
-		hintPuzzle =  new Button("View Hint");
-
-		hBox.getChildren().add(viewPuzzle);
-		hBox.getChildren().add(answerPuzzle);
-		hBox.getChildren().add(hintPuzzle);
-
-		control.viewPuzzleListener(viewPuzzle);
-		control.viewHintListener(hintPuzzle);
-		control.viewAnswerListener(answerPuzzle);
-		
-		control.showPuzzleListener(answerPuzzle);
-		
-
-		//answerPuzzle.setOnAction(e -> {
-		
-			
-		//});
-			
-		
-		return hBox;
-	}
 
 	private HBox descriptionPane() {
 		HBox hBox = new HBox(15);
@@ -294,8 +244,10 @@ public class GUI extends Login implements Observer {
 		
 		if(room.getCurrentRoom()==0) {
 			room.setCurrentRoom(room.getNumRoomID());				
-			room.enableButtons(LostTreasureMain.gui.searchRoom);
-			
+			room.enableButtons(searchRoom);
+			room.disableButton(examineMonster);
+			room.disableButton(viewPuzzle);
+
 		}
 		hBox.getChildren().add(text);
 		hBox.getChildren().add(roomsDropDown);

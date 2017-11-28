@@ -4,6 +4,18 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
 
+import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
 public class Monster extends Observable {
 	
 	private String monsterID;
@@ -82,6 +94,46 @@ public class Monster extends Observable {
 
 		return attackPercentage;
 	
+	
+	}
+	public void attackPopUp(Button attack, Button flee, Rooms room) {
+		Alert popUp = new Alert(AlertType.NONE);
+		popUp.setTitle("Battle");
+		popUp.setHeaderText("Battle");
+		ImageView logo = new ImageView("logo.png");
+		logo.setFitWidth(64);
+	    logo.setFitHeight(64);
+		popUp.setGraphic(logo);
+		VBox pop = new VBox();
+		pop.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
+				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
+		pop.setPadding(new Insets(50, 50, 50, 50));
+		attack = new Button("Attack");
+		flee = new Button("Flee");	
+		
+		popUp.getButtonTypes().add(ButtonType.CANCEL);
+		popUp.hide();
+		popUp.getButtonTypes().remove(ButtonType.CANCEL);
+
+		attack.setOnAction(e->{
+			System.out.println("attacked");
+		});
+		flee.setOnAction(e -> {
+			addObserver(LostTreasureMain.gui);
+			
+			FleeMonster(room.getCurrentRoom());
+			// quits and closes the gui
+			popUp.close();
+
+			System.out.println("flee");
+
+		});
+		
+		pop.getChildren().add(attack);
+		pop.getChildren().add(flee);
+		popUp.getDialogPane().setContent(pop);
+		popUp.show();
+		
 	
 	}
 	public void setFleeMonster(String fleeMonster) {

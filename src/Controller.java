@@ -122,8 +122,8 @@ public class Controller {
 						//System.out.println("current room monster id " + roomTemp.getMonster());
 						//System.out.println("sssmmm" + monster.currentMonster(roomTemp.getMonster()));
 
-						room.enableButtons(LostTreasureMain.gui.fightMonster);
-						room.enableButtons(LostTreasureMain.gui.fleeMonster);
+						//room.enableButtons(LostTreasureMain.gui.fightMonster);
+						//room.enableButtons(LostTreasureMain.gui.fleeMonster);
 						monster.setCurrentMonster(monster.currentMonster(roomTemp.getMonster()));
 						System.out.println("get current monster index "+monster.getCurrentMonster());
 					} else 
@@ -134,6 +134,7 @@ public class Controller {
 				
 			}
 			monster.ViewMonster(room.getCurrentRoom());
+			monster.attackPopUp(LostTreasureMain.gui.fightMonster, LostTreasureMain.gui.fleeMonster, room);
 
 		});
 	}
@@ -154,8 +155,8 @@ public class Controller {
 		}
 		public void fleeMonsterListener(Button flee) {
 			flee.setOnAction(e->{
-				monster.addObserver(LostTreasureMain.gui);
-				monster.FleeMonster(room.getCurrentRoom());
+				//monster.addObserver(LostTreasureMain.gui);
+				//monster.FleeMonster(room.getCurrentRoom());
 				
 			});
 		}
@@ -164,7 +165,9 @@ public class Controller {
 				System.out.println("you have attacked the monster");
 				monster.addObserver(LostTreasureMain.gui);
 				monster.AttackMonster(room.getCurrentRoom());
-		
+				//creates a pop up with the attack and flee buttons, go to monsters for listeners
+				monster.attackPopUp(LostTreasureMain.gui.fightMonster, LostTreasureMain.gui.fleeMonster, room);
+				
 				
 			
 			});
@@ -188,12 +191,8 @@ public class Controller {
 
 							room.enableButtons(LostTreasureMain.gui.pickupItem);
 							room.enableButtons(LostTreasureMain.gui.examineMonster);
-
 							room.enableButtons(LostTreasureMain.gui.pickupItem);	
-							room.enableButtons(LostTreasureMain.gui.examineMonster);
-							room.enableButtons(LostTreasureMain.gui.fightMonster);	
-							room.enableButtons(LostTreasureMain.gui.fleeMonster);
-							
+							room.enableButtons(LostTreasureMain.gui.viewPuzzle);				
 
 						} else 
 						{
