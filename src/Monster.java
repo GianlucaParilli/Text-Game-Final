@@ -11,7 +11,12 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -31,7 +36,7 @@ public class Monster extends Observable {
 	private int currentMonster;
 	private String currentMonsterName;
 	private static ArrayList<Monster> monstersArray = new ArrayList<>();
-  
+	Label descriptionText = new Label();
 	public Monster() {
 		try {
 			monsterReader();
@@ -97,17 +102,16 @@ public class Monster extends Observable {
 	
 	}
 	public void attackPopUp(Button attack, Button flee, Rooms room) {
+								
 		Alert popUp = new Alert(AlertType.NONE);
 		popUp.setTitle("Battle");
 		popUp.setHeaderText("Battle");
+		popUp.setResizable(true);
+		popUp.setWidth(150);
 		ImageView logo = new ImageView("logo.png");
 		logo.setFitWidth(64);
 	    logo.setFitHeight(64);
 		popUp.setGraphic(logo);
-		VBox pop = new VBox();
-		pop.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
-				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
-		pop.setPadding(new Insets(50, 50, 50, 50));
 		attack = new Button("Attack");
 		flee = new Button("Flee");	
 		
@@ -127,13 +131,38 @@ public class Monster extends Observable {
 
 			System.out.println("flee");
 
-		});
+		});	
+		//description pane for popUp
+		HBox monsterDescription = new HBox(15);
+		monsterDescription.setMinHeight(300);
+		monsterDescription.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
+				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
+		monsterDescription.setMinWidth(300);
+		monsterDescription.setMaxHeight(200);
+		descriptionText = new Label();
+		descriptionText.setFont(Font.font("Verdana", 15));
+		descriptionText.setWrapText(true);
+		monsterDescription.setPadding(new Insets(15, 15, 15, 15));
+		// sets the text from the radio buttons to the description box
+		descriptionText.setText("sfgsfdgsdfsd");
+		monsterDescription.getChildren().add(descriptionText);
 		
-		pop.getChildren().add(attack);
-		pop.getChildren().add(flee);
-		popUp.getDialogPane().setContent(pop);
-		popUp.show();
-		
+		//pane for buttons
+		BorderPane hBox = new BorderPane();
+		attack.setTranslateX(40);
+		flee.setTranslateX(-40);
+		hBox.setLeft(attack);
+		hBox.setRight(flee);
+
+		// adding the action listener from the controller class
+
+		GridPane pane = new GridPane();
+		pane.setHgap(5);
+		// node,column,row
+		pane.add(monsterDescription, 0, 0);
+		pane.add(hBox, 0, 1);
+		popUp.getDialogPane().setContent(pane);
+		popUp.show();		
 	
 	}
 	public void setFleeMonster(String fleeMonster) {
