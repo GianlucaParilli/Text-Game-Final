@@ -27,16 +27,19 @@ public class Monster extends Observable {
 	private String monsterName;
 	private String monsterDescription;
 	private String EXP;
-	private String damageGiven;
+	private int damageGiven;
 	private String healthPoints;
 	private String attackPercentage;
 	private String artifactsDropped;
 	private String fleeMonster;
 	private int currentRoom = 0;
 	private int currentMonster;
+	private int HP;
+	private int monsterDamage;
 	private String currentMonsterName;
 	private static ArrayList<Monster> monstersArray = new ArrayList<>();
 	Label descriptionText = new Label();
+	
 	public Monster() {
 		try {
 			monsterReader();
@@ -47,7 +50,7 @@ public class Monster extends Observable {
 	}
 
 	public Monster(String monsterID, int currentMonster, String monsterName, String monsterDescription,
-			String EXP, String damageGiven, String healthPoints, String attackPercentage, 
+			String EXP, int damageGiven, String healthPoints, int HP, String attackPercentage, 
 			String artifactsDropped)
 	{
 		this.monsterID = monsterID;
@@ -57,6 +60,7 @@ public class Monster extends Observable {
 		this.EXP = EXP;
 		this.damageGiven = damageGiven;
 		this.healthPoints = healthPoints;
+		this.HP = HP;
 		this.attackPercentage = attackPercentage;
 		this.artifactsDropped = artifactsDropped;
 	}
@@ -95,8 +99,8 @@ public class Monster extends Observable {
 	public String AttackMonster(int currentRoom){
 		System.out.println(currentRoom);
 	//	setAttackPercentage(getMonstersArray().get(currentRoom).getArtifactsDropped());
-		getMonstersArray().get(currentMonster).getHealthPoints();
-
+		getMonstersArray().get(currentMonster).setHP();
+		monsterDamage = getMonstersArray().get(currentMonster).getDamageGiven();
 		return attackPercentage;
 	
 	
@@ -120,6 +124,9 @@ public class Monster extends Observable {
 		popUp.getButtonTypes().remove(ButtonType.CANCEL);
 
 		attack.setOnAction(e->{
+			if(getMonstersArray().get(currentMonster).getHP() == 0) {
+				getMonstersArray().get(currentMonster).setHP(Character.get);
+			}
 			System.out.println("attacked");
 		});
 		flee.setOnAction(e -> {
@@ -223,21 +230,26 @@ public class Monster extends Observable {
 
 		while(reader.hasNext()){
 			String monsterID = reader.nextLine();
-			//
-			//
 			String digits = monsterID.replaceAll("[^0-9.]","");
-
 			int currentMonster = Integer.parseInt(digits);
+			
 			String monsterName = reader.nextLine();
 			String monsterDescription= reader.nextLine();
 			String EXP = reader.nextLine();
-			String damageGiven = reader.nextLine();
+			
+			String attackDamage = reader.nextLine();
+			String digitsD = attackDamage.replaceAll("[^0-9.]","");
+			int damageGiven = Integer.parseInt(digitsD);
+			
 			String healthPoints = reader.nextLine();
+			String hpDigit = healthPoints.replaceAll("[^0-9.]","");
+			int HP = Integer.parseInt(hpDigit);
+			
 			String attackPercentage = reader.nextLine();
 			String artifactsDropped = reader.nextLine();
 
 			Monster monster = new Monster( monsterID, currentMonster, monsterName, monsterDescription, EXP, 
-					damageGiven, healthPoints, attackPercentage, artifactsDropped);
+					damageGiven, healthPoints, HP, attackPercentage, artifactsDropped);
 			monstersArray.add(monster);
 		}
 	}
@@ -330,6 +342,14 @@ public class Monster extends Observable {
 
 	public void setCurrentMonsterName(String currentMonsterName) {
 		this.currentMonsterName = currentMonsterName;
+	}
+
+	public int getHP() {
+		return HP;
+	}
+
+	public void setHP(int hP) {
+		HP = hP;
 	}
 	
 	
