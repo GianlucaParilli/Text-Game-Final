@@ -146,13 +146,17 @@ public class Monster extends Observable {
 				monsterTemp.setHP(currentHP);
 				Character.player.setCharHealth(playerHP - monDamage);
 				System.out.println("Player HP: " + playerHP);
+				if (currentHP > 0) {
+					setUpdateMVC("You attacked a "+ monsterTemp.getMonsterName() +"\n\n\n"+ 
+					"Monster's HP "+currentHP + "\n\n"+ "Player's HP "+playerHP);
+				} else {
 				setUpdateMVC("You attacked a "+ monsterTemp.getMonsterName() +"\n\n\n"+ 
-				"Monster's HP "+currentHP + "\n\n"+ "Player's HP "+playerHP);
+				"Monster's HP "+ "0" + "\n\n"+ "Player's HP "+playerHP);
+				}
 			}else{
 				setUpdateMVC("You defeated the "+ monsterTemp.getMonsterName() +"\n\n\n");
 				System.out.println("Monster has been defeated!");
 				LostTreasureMain.gui.examineMonster.setDisable(true);
-
 				popUp.close();
 				monsterTemp.setDead(true);
 				System.out.println(monsterTemp.isDead());
