@@ -35,6 +35,7 @@ public class Monster extends Observable {
 	private int currentRoom = 0;
 	private int currentMonster;
 	private int HP;
+	private int currentHP;
 	private int monsterDamage;
 	private String currentMonsterName;
 	private static ArrayList<Monster> monstersArray = new ArrayList<>();
@@ -352,6 +353,14 @@ public class Monster extends Observable {
 
 	public void setHP(int hP) {
 		HP = hP;
+	}
+
+	public int getCurrentHP() {
+		return currentHP;
+	}
+
+	public void setCurrentHP(int currentHP) {
+		this.currentHP = currentHP;
 	}
 	
 	

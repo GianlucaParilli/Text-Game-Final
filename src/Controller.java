@@ -180,10 +180,12 @@ public class Controller {
 		popUp.getButtonTypes().remove(ButtonType.CANCEL);
 
 		attack.setOnAction(e->{
-			if(monster.getMonstersArray().get(monster.getCurrentMonster()).getHP() <= 0) {
+			if(monster.getMonstersArray().get(monster.getCurrentMonster()).getHP() >= 0) {
 				System.out.println("AttackedNOWWW");
+				monster.setCurrentHP(monster.getMonstersArray().get(monster.getCurrentMonster()).getCurrentHP() - 10);
+			} else if(monster.getMonstersArray().get(monster.getCurrentMonster()).getHP() <= 0){
+				System.out.println("This Monster Is Dead!");
 			}
-			System.out.println("attackedTHIS");
 		});
 		flee.setOnAction(e -> {
 			monster.addObserver(LostTreasureMain.gui);
