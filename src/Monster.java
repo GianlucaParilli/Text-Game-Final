@@ -99,79 +99,81 @@ public class Monster extends Observable {
 	public String AttackMonster(int currentRoom){
 		System.out.println(currentRoom);
 	//	setAttackPercentage(getMonstersArray().get(currentRoom).getArtifactsDropped());
-		getMonstersArray().get(currentMonster).setHP();
+		//getMonstersArray().get(currentMonster).setHP(THIS SHOULD BE THE DAMAGE DONE);
 		monsterDamage = getMonstersArray().get(currentMonster).getDamageGiven();
 		return attackPercentage;
 	
 	
 	}
-	public void attackPopUp(Button attack, Button flee, Rooms room) {
-								
-		Alert popUp = new Alert(AlertType.NONE);
-		popUp.setTitle("Battle");
-		popUp.setHeaderText("Battle");
-		popUp.setResizable(true);
-		popUp.setWidth(150);
-		ImageView logo = new ImageView("logo.png");
-		logo.setFitWidth(64);
-	    logo.setFitHeight(64);
-		popUp.setGraphic(logo);
-		attack = new Button("Attack");
-		flee = new Button("Flee");	
-		
-		popUp.getButtonTypes().add(ButtonType.CANCEL);
-		popUp.hide();
-		popUp.getButtonTypes().remove(ButtonType.CANCEL);
-
-		attack.setOnAction(e->{
-			if(getMonstersArray().get(currentMonster).getHP() == 0) {
-				getMonstersArray().get(currentMonster).setHP(Character.get);
-			}
-			System.out.println("attacked");
-		});
-		flee.setOnAction(e -> {
-			addObserver(LostTreasureMain.gui);
-			
-			FleeMonster(room.getCurrentRoom());
-			// quits and closes the gui
-			popUp.close();
-
-			System.out.println("flee");
-
-		});	
-		//description pane for popUp
-		HBox monsterDescription = new HBox(15);
-		monsterDescription.setMinHeight(300);
-		monsterDescription.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
-				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
-		monsterDescription.setMinWidth(300);
-		monsterDescription.setMaxHeight(200);
-		descriptionText = new Label();
-		descriptionText.setFont(Font.font("Verdana", 15));
-		descriptionText.setWrapText(true);
-		monsterDescription.setPadding(new Insets(15, 15, 15, 15));
-		// sets the text from the radio buttons to the description box
-		descriptionText.setText("sfgsfdgsdfsd");
-		monsterDescription.getChildren().add(descriptionText);
-		
-		//pane for buttons
-		BorderPane hBox = new BorderPane();
-		attack.setTranslateX(40);
-		flee.setTranslateX(-40);
-		hBox.setLeft(attack);
-		hBox.setRight(flee);
-
-		// adding the action listener from the controller class
-
-		GridPane pane = new GridPane();
-		pane.setHgap(5);
-		// node,column,row
-		pane.add(monsterDescription, 0, 0);
-		pane.add(hBox, 0, 1);
-		popUp.getDialogPane().setContent(pane);
-		popUp.show();		
-	
-	}
+//	public void attackPopUp(Button attack, Button flee, Rooms room) {
+//								
+//		Alert popUp = new Alert(AlertType.NONE);
+//		popUp.setTitle("Battle");
+//		popUp.setHeaderText("Battle");
+//		popUp.setResizable(true);
+//		popUp.setWidth(150);
+//		ImageView logo = new ImageView("logo.png");
+//		logo.setFitWidth(64);
+//	    logo.setFitHeight(64);
+//		popUp.setGraphic(logo);
+//		attack = new Button("Attack");
+//		flee = new Button("Flee");	
+//		
+//		popUp.getButtonTypes().add(ButtonType.CANCEL);
+//		popUp.hide();
+//		popUp.getButtonTypes().remove(ButtonType.CANCEL);
+//
+//		attack.setOnAction(e->{
+//			if(getMonstersArray().get(currentMonster).getHP() <= 0) {
+//				System.out.println("Attacked");
+//				
+//				
+//			}
+//			System.out.println("attacked");
+//		});
+//		flee.setOnAction(e -> {
+//			addObserver(LostTreasureMain.gui);
+//			
+//			FleeMonster(room.getCurrentRoom());
+//			// quits and closes the gui
+//			popUp.close();
+//
+//			System.out.println("flee");
+//
+//		});	
+//		//description pane for popUp
+//		HBox monsterDescription = new HBox(15);
+//		monsterDescription.setMinHeight(300);
+//		monsterDescription.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
+//				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
+//		monsterDescription.setMinWidth(300);
+//		monsterDescription.setMaxHeight(200);
+//		descriptionText = new Label();
+//		descriptionText.setFont(Font.font("Verdana", 15));
+//		descriptionText.setWrapText(true);
+//		monsterDescription.setPadding(new Insets(15, 15, 15, 15));
+//		// sets the text from the radio buttons to the description box
+//		descriptionText.setText("sfgsfdgsdfsd");
+//		monsterDescription.getChildren().add(descriptionText);
+//		
+//		//pane for buttons
+//		BorderPane hBox = new BorderPane();
+//		attack.setTranslateX(40);
+//		flee.setTranslateX(-40);
+//		hBox.setLeft(attack);
+//		hBox.setRight(flee);
+//
+//		// adding the action listener from the controller class
+//
+//		GridPane pane = new GridPane();
+//		pane.setHgap(5);
+//		// node,column,row
+//		pane.add(monsterDescription, 0, 0);
+//		pane.add(hBox, 0, 1);
+//		popUp.getDialogPane().setContent(pane);
+//		popUp.show();		
+//	
+//	}
 	public void setFleeMonster(String fleeMonster) {
 		this.fleeMonster = fleeMonster;
 		System.out.println("You have fled the monster, no experience gained");
@@ -285,11 +287,11 @@ public class Monster extends Observable {
 		EXP = eXP;
 	}
 
-	public String getDamageGiven() {
+	public int getDamageGiven() {
 		return damageGiven;
 	}
 
-	public void setDamageGiven(String damageGiven) {
+	public void setDamageGiven(int damageGiven) {
 		this.damageGiven = damageGiven;
 	}
 
