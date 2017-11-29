@@ -131,6 +131,7 @@ public class Puzzles extends Observable {
 		});
 		hint.setOnAction(e->{
 
+			setPuzzleHint(getPuzzlesArray().get(currentRoom).getPuzzleHint());
 			
 			
 		});
@@ -165,6 +166,7 @@ public class Puzzles extends Observable {
 		for (String temp :puzzlesAnswerArray) {
 			cb = new RadioButton(temp);
 			StarsButton = new RadioButton(temp);
+			//StarsButton = new RadioButton(temp);
 			cb.setFont(Font.font("Verdana", 16));
 
 			cb.setToggleGroup(toggleGroup);
