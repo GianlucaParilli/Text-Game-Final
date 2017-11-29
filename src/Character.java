@@ -21,7 +21,7 @@ public class Character extends Observable{
 		
 	}
 	
-	static Character player = new Character(charID, charName, charDescription, 100, 15) ;
+	static Character player = new Character(charID, charName, charDescription, 1000, 15) ;
 
 	public int getCharDamage() {
 		return charDamage;
