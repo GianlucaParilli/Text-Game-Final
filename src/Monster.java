@@ -129,12 +129,16 @@ public class Monster extends Observable {
 			Monster monsterTemp = monster.getMonstersArray().get(monster.getCurrentMonster());	
 			int currentHP = monsterTemp.getHP();
 			int damage = Character.player.getCharDamage();	
+			int playerHP = Character.player.getCharHealth();
+			int monDamage = monsterTemp.getDamageGiven();
 			
 			if (currentHP > 0) {
 				System.out.println("AttackedNOWWW");
 				currentHP = currentHP - damage;
 				System.out.println(currentHP);
 				monsterTemp.setHP(currentHP);
+				Character.player.setCharHealth(playerHP - monDamage);
+				System.out.println("Player HP: " + playerHP);
 			}else{
 				System.out.println("Monster has been defeated!");
 				popUp.close();
