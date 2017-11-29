@@ -127,14 +127,14 @@ public class Monster extends Observable {
 
 		attack.setOnAction(e -> {
 			Monster monsterTemp = monster.getMonstersArray().get(monster.getCurrentMonster());	
-			int currentHP = monster.getMonstersArray().get(monster.getCurrentMonster()).getHP();
+			int currentHP = monsterTemp.getHP();
 			int damage = 10;	
 			
 			if (currentHP > 0) {
 				System.out.println("AttackedNOWWW");
 				currentHP = currentHP - damage;
 				System.out.println(currentHP);
-				monster.getMonstersArray().get(monster.getCurrentMonster()).setHP(currentHP);
+				monsterTemp.setHP(currentHP);
 			}else{
 				System.out.println("Monster has been defeated!");
 				popUp.close();
