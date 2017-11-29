@@ -96,6 +96,22 @@ public class Controller {
 						room.getRoomsArray().get(9).setLocked(false);
 
 					}
+					if (tempitemID.equals("K2")) {
+						room.getRoomsArray().get(15).setLocked(false);
+
+					}if (tempitemID.equals("K3")) {
+						room.getRoomsArray().get(32).setLocked(false);
+
+					}if (tempitemID.equals("K4")) {
+						room.getRoomsArray().get(26).setLocked(false);
+
+					}if (tempitemID.equals("K5")) {
+						room.getRoomsArray().get(31).setLocked(false);
+
+					}if (tempitemID.equals("K6")) {
+						room.getRoomsArray().get(31).setLocked(false);
+
+					}
 
 				}
 			}
@@ -187,15 +203,17 @@ public class Controller {
 			temp.setId(item.getItemDescription());
 			temp.setOnAction(e -> {
 				item.addObserver(LostTreasureMain.gui);
-				item.viewItems(room.getItem());
 				//System.out.println("current "+room.getCurrentRoom());
-				
+				String tempItemID;
 				for(Rooms roomTemp : room.getRoomsArray()){
 					if (roomTemp.getRoomName().equals(dropdown)) {
 						
 						if(roomTemp.getRoomName().equals(dropdown) && roomTemp.isLooted() == false)
 						{
 							roomTemp.setSearched(true);
+							
+							item.viewItems(roomTemp.getItem());
+
 							//System.out.println(roomTemp.isSearched() + "sss");
 
 							room.enableButtons(LostTreasureMain.gui.pickupItem);
