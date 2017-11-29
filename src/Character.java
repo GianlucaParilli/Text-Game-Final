@@ -2,17 +2,17 @@ import java.util.Observable;
 
 public class Character extends Observable{
 
-	public String charID;
-	public String charName;
-	public String charDescription;
-	public String charHealth;
-	public String charDamage;
+	public static String charID;
+	public static String charName;
+	public static String charDescription;
+	public int charHealth;
+	public int charDamage;
 	
-	public Character(String charID, String charName, String charDescription, String charHealth, String charDamage){
+	public Character(String charID, String charName, String charDescription, int charHealth, int charDamage){
 		
-		this.charID = charID;
-		this.charName = charName;
-		this.charDescription = charDescription;
+		Character.charID = charID;
+		Character.charName = charName;
+		Character.charDescription = charDescription;
 		this.charHealth = charHealth;
 		this.charDamage = charDamage;
 	}
@@ -20,12 +20,14 @@ public class Character extends Observable{
 	public Character() {
 		
 	}
+	
+	static Character player = new Character(charID, charName, charDescription, 100, 15) ;
 
-	public String getCharDamage() {
+	public int getCharDamage() {
 		return charDamage;
 	}
 
-	public void setCharDamage(String charDamage) {
+	public void setCharDamage(int charDamage) {
 		this.charDamage = charDamage;
 	}
 
@@ -34,7 +36,7 @@ public class Character extends Observable{
 	}
 
 	public void setCharID(String charID) {
-		this.charID = charID;
+		Character.charID = charID;
 	}
 
 	public String getCharName() {
@@ -42,7 +44,7 @@ public class Character extends Observable{
 	}
 
 	public void setCharName(String charName) {
-		this.charName = charName;
+		Character.charName = charName;
 	}
 
 	public String getCharDescription() {
@@ -50,14 +52,14 @@ public class Character extends Observable{
 	}
 
 	public void setCharDescription(String charDescription) {
-		this.charDescription = charDescription;
+		Character.charDescription = charDescription;
 	}
 
-	public String getCharHealth() {
+	public int getCharHealth() {
 		return charHealth;
 	}
 
-	public void setCharHealth(String charHealth) {
+	public void setCharHealth(int charHealth) {
 		this.charHealth = charHealth;
 	}
 	
