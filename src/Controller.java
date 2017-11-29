@@ -275,7 +275,6 @@ public class Controller {
 				//
 
 			}
-
 			room.getCurrentRoom();
 		});
 	}

@@ -39,6 +39,9 @@ public class Monster extends Observable {
 	private int monsterDamage;
 	private String currentMonsterName;
 	private static ArrayList<Monster> monstersArray = new ArrayList<>();
+	private static ArrayList<Monster> savedState = new ArrayList<>();
+	private boolean isDead;
+
 	Label descriptionText = new Label();
 	
 	public Monster() {
@@ -52,7 +55,7 @@ public class Monster extends Observable {
 
 	public Monster(String monsterID, int currentMonster, String monsterName, String monsterDescription,
 			String EXP, int damageGiven, String healthPoints, int HP, String attackPercentage, 
-			String artifactsDropped)
+			String artifactsDropped, boolean isDead, int currentHP)
 	{
 		this.monsterID = monsterID;
 		this.currentMonster = currentMonster;
@@ -64,6 +67,8 @@ public class Monster extends Observable {
 		this.HP = HP;
 		this.attackPercentage = attackPercentage;
 		this.artifactsDropped = artifactsDropped;
+		this.isDead = isDead;
+		this.currentHP = currentHP;
 	}
 	
 	public void setMonsterDescription(String monsterDescription) {
@@ -109,6 +114,9 @@ public class Monster extends Observable {
 
 	public void attackPopUp(Button attack, Button flee, Rooms room, Monster monster) {
 
+		Monster monsterTemp = monster.getMonstersArray().get(monster.getCurrentMonster());
+		monsterTemp.setDead(false);
+		System.out.println(monsterTemp.isDead());
 		Alert popUp = new Alert(AlertType.NONE);
 		popUp.setTitle("Battle");
 		popUp.setHeaderText("Battle");
@@ -126,23 +134,30 @@ public class Monster extends Observable {
 		popUp.getButtonTypes().remove(ButtonType.CANCEL);
 
 		attack.setOnAction(e -> {
-			Monster monsterTemp = monster.getMonstersArray().get(monster.getCurrentMonster());	
+	
 			int currentHP = monsterTemp.getHP();
+			int monDamage = monsterTemp.getDamageGiven();
 			int damage = Character.player.getCharDamage();	
 			int playerHP = Character.player.getCharHealth();
-			int monDamage = monsterTemp.getDamageGiven();
 			
 			if (currentHP > 0) {
-				System.out.println("AttackedNOWWW");
+				System.out.println("Attacked NOWWW");
 				currentHP = currentHP - damage;
-				System.out.println(currentHP);
 				monsterTemp.setHP(currentHP);
+				System.out.println(currentHP);
+				
 				Character.player.setCharHealth(playerHP - monDamage);
 				System.out.println("Player HP: " + playerHP);
 			}else{
 				System.out.println("Monster has been defeated!");
 				popUp.close();
+				monsterTemp.setDead(true);
+				System.out.println(monsterTemp.isDead());
+				room.disableButton(LostTreasureMain.gui.examineMonster);
+				monsterTemp.setHP(monster.getMonstersArray().get(monster.getCurrentMonster()).getCurrentHP());
+				System.out.println(monster.getSavedState().get(monster.getCurrentMonster()).getHP());
 			}
+			
 		});
 		
 		flee.setOnAction(e -> {
@@ -266,10 +281,13 @@ public class Monster extends Observable {
 			
 			String attackPercentage = reader.nextLine();
 			String artifactsDropped = reader.nextLine();
+			boolean isDead = false;
+			int currentHP = HP;
 
 			Monster monster = new Monster( monsterID, currentMonster, monsterName, monsterDescription, EXP, 
-					damageGiven, healthPoints, HP, attackPercentage, artifactsDropped);
+					damageGiven, healthPoints, HP, attackPercentage, artifactsDropped, isDead, currentHP);
 			monstersArray.add(monster);
+			savedState.add(monster);
 		}
 	}
 
@@ -379,5 +397,24 @@ public class Monster extends Observable {
 		this.currentHP = currentHP;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public void reset() {
+		monstersArray = (ArrayList<Monster>) savedState.clone();
+	}
 	
+	public ArrayList<Monster> getSavedState() {
+		return savedState;
+	}
+
+	public static void setSavedState(ArrayList<Monster> savedState) {
+		Monster.savedState = savedState;
+	}
+	
+	public boolean isDead() {
+		return isDead;
+	}
+
+	public void setDead(boolean isDead) {
+		this.isDead = isDead;
+	}
 }
