@@ -51,6 +51,25 @@ public class Puzzles extends Observable {
 		this.puzzleHint = puzzleHint;
 
 	}
+	
+	
+	
+	
+	/*public int currentPuzzle(String puzzleID) {
+		int currentID=0;
+		//System.out.println("monsters position " +getMonstersArray().get(0));
+		for(Puzzles m : getPuzzlesArray()) {
+			if(m.getPuzzleID().equals(puzzleID)) {
+				currentID = getPuzzlesArray().indexOf(m);
+				System.out.println("current monster " + m.getPuzzleDescription());
+				setPuzzleDescription((m.getPuzzleDescription()));
+
+			}
+		}
+		System.out.println("current monster position " + currentID);
+
+		return currentID;
+	}*/
 
 	public void puzzlePopUp(ArrayList<String> puzzleArray) {
 		Alert popUp = new Alert(AlertType.INFORMATION);
@@ -107,6 +126,8 @@ public class Puzzles extends Observable {
 
 		answer.setOnAction(e->{
 			System.out.println("answer");
+			
+			
 		});
 		hint.setOnAction(e->{
 
@@ -130,14 +151,36 @@ public class Puzzles extends Observable {
 				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
 		puzzleDescription.setMinWidth(300);
 		puzzleDescription.setMaxHeight(200);
-		descriptionText = new Label();
-		descriptionText.setFont(Font.font("Verdana", 15));
-		descriptionText.setWrapText(true);
+		//descriptionText = new Label();
+		//descriptionText.setFont(Font.font("Verdana", 15));
+		//descriptionText.setWrapText(true);
 		puzzleDescription.setPadding(new Insets(15, 15, 15, 15));
+		RadioButton cb; 
+		RadioButton StarsButton;
+		RadioButton TreesButton;
+		RadioButton FlowersButton;
+		RadioButton MountainButton;
+		ToggleGroup toggleGroup = new ToggleGroup();
+
+		for (String temp :puzzlesAnswerArray) {
+			cb = new RadioButton(temp);
+			StarsButton = new RadioButton(temp);
+			cb.setFont(Font.font("Verdana", 16));
+
+			cb.setToggleGroup(toggleGroup);
+			puzzleDescription.getChildren().add(cb);
+			if (temp.equals(cb.getText())) {
+				cb.setOnAction(e -> {
+					System.out.println(temp);
+				});
+			}
+		}
+
 		// sets the text from the radio buttons to the description box
 		
-		descriptionText.setText(ViewPuzzle(currentRoom));
-		puzzleDescription.getChildren().add(descriptionText);
+		//descriptionText.setText("jsd");
+	
+		//puzzleDescription.getChildren().add(descriptionText);
 		
 		//pane for buttons
 		BorderPane hBox = new BorderPane();
