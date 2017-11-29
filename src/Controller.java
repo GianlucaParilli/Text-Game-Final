@@ -122,8 +122,37 @@ public class Controller {
 	public void viewPuzzleListener(Button temp) {
 		temp.setId(puzzle.getPuzzleDescription());
 		temp.setOnAction(e -> {
-			//puzzle.addObserver(LostTreasureMain.gui);
-			//puzzle.ViewPuzzle(room.getCurrentRoom());
+			puzzle.addObserver(LostTreasureMain.gui);
+			for(Puzzles p : puzzle.getPuzzlesArray()) {
+				if(p.getPuzzleID().equals("P1")) {
+					puzzle.ViewPuzzle(puzzle.currentPuzzle("P1"));
+					puzzle.descriptionText.setText("f");
+					puzzle.puzzleButtonClicked();
+					
+				}
+				if(p.getPuzzleID().equals("P2")) {
+					puzzle.ViewPuzzle(puzzle.currentPuzzle("P1"));
+				}
+				if(p.getPuzzleID().equals("P3")) {
+					puzzle.ViewPuzzle(puzzle.currentPuzzle("P1"));
+				}
+				if(p.getPuzzleID().equals("P4")) {
+					puzzle.ViewPuzzle(puzzle.currentPuzzle("P1"));
+				}
+				if(p.getPuzzleID().equals("P5")) {
+					puzzle.ViewPuzzle(puzzle.currentPuzzle("P1"));
+				}
+				if(p.getPuzzleID().equals("P6")) {
+					puzzle.ViewPuzzle(puzzle.currentPuzzle("P1"));
+				}
+				if(p.getPuzzleID().equals("P7")) {
+					puzzle.ViewPuzzle(puzzle.currentPuzzle("P1"));
+				}
+				if(p.getPuzzleID().equals("P8")) {
+					puzzle.ViewPuzzle(puzzle.currentPuzzle("P1"));
+				}
+			}
+
 			
 			//go to puzzle pop up for the buttons listeners
 			puzzle.puzzlePopUp(LostTreasureMain.gui.answerPuzzle, LostTreasureMain.gui.hintPuzzle,
@@ -217,20 +246,24 @@ public class Controller {
 								
 								room.disableButton(LostTreasureMain.gui.pickupItem);
 								room.disableButton(LostTreasureMain.gui.examine);
+								room.disableButton(LostTreasureMain.gui.viewPuzzle);
+								room.disableButton(LostTreasureMain.gui.examineMonster);
+								room.disableButton(LostTreasureMain.gui.searchRoom);	
+
 
 
 								
 								//item.setItemDescription("nothing");
 							}
-								else {
+							else {
 							item.viewItems(roomTemp.getItem());
+							room.enableButtons(LostTreasureMain.gui.pickupItem);
+							room.enableButtons(LostTreasureMain.gui.examineMonster);
+							room.enableButtons(LostTreasureMain.gui.viewPuzzle);	
 								}
 							//System.out.println(roomTemp.isSearched() + "sss");
 
-							room.enableButtons(LostTreasureMain.gui.pickupItem);
-							room.enableButtons(LostTreasureMain.gui.examineMonster);
-							room.enableButtons(LostTreasureMain.gui.pickupItem);	
-							room.enableButtons(LostTreasureMain.gui.viewPuzzle);				
+									
 
 						} else 
 						{

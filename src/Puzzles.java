@@ -55,7 +55,7 @@ public class Puzzles extends Observable {
 	
 	
 	
-	/*public int currentPuzzle(String puzzleID) {
+	public int currentPuzzle(String puzzleID) {
 		int currentID=0;
 		//System.out.println("monsters position " +getMonstersArray().get(0));
 		for(Puzzles m : getPuzzlesArray()) {
@@ -69,7 +69,7 @@ public class Puzzles extends Observable {
 		System.out.println("current monster position " + currentID);
 
 		return currentID;
-	}*/
+	}
 
 	public void puzzlePopUp(ArrayList<String> puzzleArray) {
 		Alert popUp = new Alert(AlertType.INFORMATION);
@@ -126,11 +126,11 @@ public class Puzzles extends Observable {
 
 		answer.setOnAction(e->{
 			System.out.println("answer");
-			
+			addObserver(LostTreasureMain.gui);
 			
 		});
 		hint.setOnAction(e->{
-
+			addObserver(LostTreasureMain.gui);
 			setPuzzleHint(getPuzzlesArray().get(currentRoom).getPuzzleHint());
 			System.out.println("blah");
 			
@@ -152,6 +152,8 @@ public class Puzzles extends Observable {
 				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
 		puzzleDescription.setMinWidth(300);
 		puzzleDescription.setMaxHeight(200);
+		puzzleDescription.setMaxWidth(200);
+
 		//descriptionText = new Label();
 		//descriptionText.setFont(Font.font("Verdana", 15));
 		//descriptionText.setWrapText(true);
@@ -181,7 +183,7 @@ public class Puzzles extends Observable {
 
 		// sets the text from the radio buttons to the description box
 		
-		descriptionText.setText("jsd");
+		descriptionText.setText(getPuzzleDescription());
 		puzzleDescription.getChildren().add(descriptionText);
 		
 		//pane for buttons
@@ -189,7 +191,6 @@ public class Puzzles extends Observable {
 		//answer.setTranslateX(20);
 		//hint.setTranslateX(50);
 		//exit.setTranslateX(90);
-		
 		hBox.setLeft(answer);
 		hBox.setCenter(hint);
 		hBox.setRight(exit);
@@ -248,7 +249,9 @@ public class Puzzles extends Observable {
 		return puzzleAnswer;
 
 	}
-	
+	public boolean puzzleButtonClicked() {
+		return true;
+	}
 
 	public void puzzleReader() throws FileNotFoundException {
 		@SuppressWarnings("resource")

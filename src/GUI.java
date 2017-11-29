@@ -296,6 +296,11 @@ public class GUI extends Login implements Observer {
 		}
 		else if( o instanceof Puzzles) {
 			descriptionText.setText(arg.toString());
+			if(((Puzzles) o).puzzleButtonClicked()) {
+				((Puzzles)o).descriptionText.setText(arg.toString());
+				System.out.println("update" + arg.toString());
+
+			}
 		}
 		else if( o instanceof Monster) {
 			descriptionText.setText(arg.toString());
