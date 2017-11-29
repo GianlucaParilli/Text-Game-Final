@@ -115,9 +115,6 @@ public class Monster extends Observable {
 
 	public void attackPopUp(Button attack, Button flee, Rooms room, Monster monster) {
 
-		Monster monsterTemp = monster.getMonstersArray().get(monster.getCurrentMonster());
-		monsterTemp.setDead(false);
-		System.out.println(monsterTemp.isDead());
 		Alert popUp = new Alert(AlertType.NONE);
 		popUp.setTitle("Battle");
 		popUp.setHeaderText("Battle");
