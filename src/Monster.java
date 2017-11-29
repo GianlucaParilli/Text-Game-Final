@@ -128,7 +128,7 @@ public class Monster extends Observable {
 		attack.setOnAction(e -> {
 			Monster monsterTemp = monster.getMonstersArray().get(monster.getCurrentMonster());	
 			int currentHP = monsterTemp.getHP();
-			int damage = 10;	
+			int damage = Character.player.getCharDamage();	
 			
 			if (currentHP > 0) {
 				System.out.println("AttackedNOWWW");
