@@ -126,13 +126,21 @@ public class Monster extends Observable {
 		popUp.getButtonTypes().remove(ButtonType.CANCEL);
 
 		attack.setOnAction(e -> {
-			if (monster.getMonstersArray().get(monster.getCurrentMonster()).getHP() >= 0) {
+			Monster monsterTemp = monster.getMonstersArray().get(monster.getCurrentMonster());	
+			int currentHP = monster.getMonstersArray().get(monster.getCurrentMonster()).getHP();
+			int damage = 10;	
+			
+			if (currentHP > 0) {
 				System.out.println("AttackedNOWWW");
-				monster.setCurrentHP(monster.getMonstersArray().get(monster.getCurrentMonster()).getCurrentHP() - 10);
-			} else if (monster.getMonstersArray().get(monster.getCurrentMonster()).getHP() <= 0) {
-				System.out.println("This Monster Is Dead!");
+				currentHP = currentHP - damage;
+				System.out.println(currentHP);
+				monster.getMonstersArray().get(monster.getCurrentMonster()).setHP(currentHP);
+			}else{
+				System.out.println("Monster has been defeated!");
+				popUp.close();
 			}
 		});
+		
 		flee.setOnAction(e -> {
 			monster.addObserver(LostTreasureMain.gui);
 
