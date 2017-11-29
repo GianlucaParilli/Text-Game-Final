@@ -26,7 +26,7 @@ public class Items extends Observable {
 	private String itemDescription;
 	private String itemType;
 	private String itemUsage;
-	private String itemStrength;
+	private int itemStrength;
 	private int availability;
 	private ArrayList<Items> itemsArray = new ArrayList<>();
 	private ArrayList<String> inventory = new ArrayList<>();
@@ -34,7 +34,7 @@ public class Items extends Observable {
 	private ArrayList<String> keysID = new ArrayList<>();
 
 
-	public Items( String itemID, String itemName, String itemDescription, String itemType, String itemUsage, String itemStrength,  int availability){
+	public Items( String itemID, String itemName, String itemDescription, String itemType, String itemUsage, int itemStrength,  int availability){
 		this.itemID = itemID;
 		this.itemName = itemName;
 		this.itemDescription = itemDescription;
@@ -76,7 +76,59 @@ public class Items extends Observable {
 			pop.getChildren().add(cb);
 			if (temp.equals(cb.getText())) {
 				cb.setOnAction(e -> {
-					System.out.println(temp);
+					for (Items itemTemp : getItemsArray()) {
+						if (itemTemp.getItemID() == "W1") {
+							int currentDamage = Character.player.getCharDamage();
+							int itemBonus = 10;
+							System.out.println("HEYYY");
+							Character.player.setCharDamage(currentDamage + itemBonus);
+						}else if(itemTemp.getItemID() == "W2") {
+							int currentDamage = Character.player.getCharDamage();
+							int itemBonus = 10;
+							System.out.println("HEYYY");
+							Character.player.setCharDamage(currentDamage + itemBonus);
+						}else if(itemTemp.getItemID() == "W3") {
+							int currentHealth = Character.player.getCharHealth();
+							int itemBonus = 50;
+							System.out.println("HEYYY");
+							Character.player.setCharHealth(currentHealth + itemBonus);
+						}else if(itemTemp.getItemID() == "W4") {
+							int currentDamage = Character.player.getCharDamage();
+							int itemBonus = 50;
+							System.out.println("HEYYY");
+							Character.player.setCharDamage(currentDamage + itemBonus);
+						}else if(itemTemp.getItemID() == "W6") {
+							int currentHealth = Character.player.getCharHealth();
+							int itemBonus = 50;
+							System.out.println("HEYYY");
+							Character.player.setCharHealth(currentHealth + itemBonus);
+						}else if(itemTemp.getItemID() == "H1") {
+							int currentHealth = Character.player.getCharHealth();
+							int itemBonus = 10;
+							System.out.println("HEYYY");
+							Character.player.setCharHealth(currentHealth + itemBonus);
+						}else if(itemTemp.getItemID() == "H2") {
+							int currentHealth = Character.player.getCharHealth();
+							int itemBonus = 100;
+							System.out.println("HEYYY");
+							Character.player.setCharHealth(currentHealth + itemBonus);
+						}else if(itemTemp.getItemID() == "H3") {
+							int currentHealth = Character.player.getCharHealth();
+							int itemBonus = 20;
+							System.out.println("HEYYY");
+							Character.player.setCharHealth(currentHealth + itemBonus);
+						}else if(itemTemp.getItemID() == "H4") {
+							int currentHealth = Character.player.getCharHealth();
+							int itemBonus = 10;
+							System.out.println("HEYYY");
+							Character.player.setCharHealth(currentHealth + itemBonus);
+						}else if(itemTemp.getItemID() == "H5") {
+							int currentHealth = Character.player.getCharHealth();
+							int itemBonus = 5;
+							System.out.println("HEYYY");
+							Character.player.setCharHealth(currentHealth + itemBonus);
+						}
+					}
 				});
 			}
 		}
@@ -140,7 +192,10 @@ public class Items extends Observable {
 			String itemDescription = reader.nextLine();
 			String itemType = reader.nextLine();
 			String itemUsage = reader.nextLine();
-			String itemStrength = reader.nextLine();
+			
+			String itmStrStr = reader.nextLine();
+			String digits = itmStrStr.replaceAll("[^0-9.]","");
+			int itemStrength = Integer.parseInt(digits);
 			
 			int availability = 1;
 			Items items = new Items(itemID, itemName, itemDescription, itemType, itemUsage, itemStrength, availability);
@@ -201,11 +256,11 @@ public class Items extends Observable {
 		this.itemUsage = itemUsage;
 	}
 
-	public String getItemStrength() {
+	public int getItemStrength() {
 		return itemStrength;
 	}
 
-	public void setItemStrength(String itemStrength) {
+	public void setItemStrength(int itemStrength) {
 		this.itemStrength = itemStrength;
 	}
 	

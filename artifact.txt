@@ -3,118 +3,118 @@ Sword
 Steel Sword
 Weapon
 Use as a melee weapon take out enemies and monsters
-10 Attack Points
+10
 W2
 Spear
 10ft Wooden pole with sharp steel tip
 Weapon
 Use as a melee weapon take out enemies and monsters
-10 Attack Points
+10
 W3
 Shield
 Steel Shield
 Armor
 Use as protection from melee attacks given from monsters
-50 HP
+50
 W4
 Musket Pistol
 Musket
 Weapon
 Use as a long-range weapon to take out enemies and monsters
-50 HP
+50
 W5
 Ammunition
 Brass casing with gun powder and copper bullet
 Weapon
 Use to reload musket pistol 
-10 rounds
+10
 W6
 Body Armor
 Steel Vest
 Gear
 Reduce damage given by enemies and monsters
-50 HP
+50
 H1
 Bandage
 Cotton Bandages
 Health Item
 Use to provide self-aid when health points are low
-10 HP
+10
 H2
 Healing Potion 
 Glass bottle with ancient healing water
 Health Item
 Use to provide self-aid when health points are low
-100 HP
+100
 H3
 Cotton Wrap
 Soft spool of cotton
 Health Item
 Use to conduct self-aid on open wounds
-20 HP
+20
 H4
 Mummy Wrap
 Cotton wraps
 Health Items
 Use as bandage wraps from damage given by monsters
-10 HP
+10
 H5
 Bat Meat
 Raw meat from a bat
 Health Item
 Eat to restore a small amount of health
-5 HP
+5
 N1
 Ancient Map
 Map
 Navigation
 Map of the lost temple
-none
+0
 S1
 Large Backpack 
 20 pound shoulder bag
 Storage
 Large backpack to carry items
-none
+0
 K1
 Gold Star
 Star shaped object made of gold
 Key
 Item used to unlock L1 door
-none
+0
 K2
 Left Half of an Ornate Skull
 Half of a decorative skull
 Key
 Use other half to unlock L2
-none
+0
 K3
 Right Half of an Ornate Skull
 Half of a decorative skull
 Key
 Use with other half to unlock L2
-none
+0
 K4
 The Kings Ruby
 A ruby that once belonged to the king.
 Key
 Ancient gem used to unlock certain door
-none
+0
 K5
 The Kings Sapphire 
 A sapphire that once belonged to the king.
 Key
 Ancient gem used to unlock certain door
-none
+0
 K6
 Golden Key
 A key made of solid gold
 Key
 Key that opens the door
-none
+0
 K7
 Silver Key
 A key made of solid silver
 Key
 Key that opens the door
-none1
+0

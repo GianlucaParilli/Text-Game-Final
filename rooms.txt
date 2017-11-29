@@ -145,7 +145,7 @@ true
 r16
 Elevator Room
 Description: Wide open room with a hole in the middle with one room in each corner.
-r17, r18, r19, r20, r32
+r15, r17, r18, r19, r20, r21
 M2
 none
 none
@@ -188,9 +188,9 @@ S1
 0
 false
 r21
-Antechamber
+Antechamber (Elevator Floor 2)
 Description: A large rectangular chamber with an elevator to the upper levels in the center. It looks as though no one has been down here in a very long time. There is an exit to the east and west, but massive metal door on the south side of the room catches your eye.
-r22, r24, r26, r32
+r22, r24, r26
 M3, M4, M5
 none
 none
