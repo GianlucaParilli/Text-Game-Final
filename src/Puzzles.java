@@ -157,20 +157,21 @@ public class Puzzles extends Observable {
 		//descriptionText.setWrapText(true);
 		puzzleDescription.setPadding(new Insets(15, 15, 15, 15));
 		RadioButton cb; 
-		RadioButton StarsButton;
-		RadioButton TreesButton;
-		RadioButton FlowersButton;
-		RadioButton MountainButton;
+		//RadioButton StarsButton;
+		//RadioButton TreesButton;
+		//RadioButton FlowersButton;
+		//RadioButton MountainButton;
 		ToggleGroup toggleGroup = new ToggleGroup();
-
+		VBox vpane = new VBox();
+		
 		for (String temp :puzzlesAnswerArray) {
 			cb = new RadioButton(temp);
-			StarsButton = new RadioButton(temp);
+			//StarsButton = new RadioButton(temp);
 			//StarsButton = new RadioButton(temp);
 			cb.setFont(Font.font("Verdana", 16));
 
 			cb.setToggleGroup(toggleGroup);
-			puzzleDescription.getChildren().add(cb);
+			vpane.getChildren().add(cb);
 			if (temp.equals(cb.getText())) {
 				cb.setOnAction(e -> {
 					System.out.println(temp);
@@ -180,9 +181,8 @@ public class Puzzles extends Observable {
 
 		// sets the text from the radio buttons to the description box
 		
-		//descriptionText.setText("jsd");
-	
-		//puzzleDescription.getChildren().add(descriptionText);
+		descriptionText.setText("jsd");
+		puzzleDescription.getChildren().add(descriptionText);
 		
 		//pane for buttons
 		BorderPane hBox = new BorderPane();
@@ -205,7 +205,8 @@ public class Puzzles extends Observable {
 		pane.setHgap(5);
 		// node,column,row
 		pane.add(puzzleDescription, 0, 0);
-		pane.add(hBox, 0, 1);
+		pane.add(vpane, 1, 0);
+		pane.add(hBox, 0, 2);
 		popUp.getDialogPane().setContent(pane);
 		popUp.show();		
 	

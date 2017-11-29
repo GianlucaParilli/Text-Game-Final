@@ -129,7 +129,7 @@ East Chamber
 Description: A chamber with book shelves, tables, cobwebs, old ripped scripts and skeletons. 
 r13
 M1
-p3
+P3
 K3
 0
 false
@@ -156,7 +156,7 @@ Armory
 Description: A room with knives, swords, bow and arrows, and spears. You see a large wooden chest with a riddle written around the lock.
 r16
 M1
-p4
+P4
 W6
 0
 false
@@ -165,7 +165,7 @@ Switch Room
 Description: A small room with a large mechanical device in the center. There is an ornate metal lever in the middle of it. 
 r16
 M1
-p5
+P5
 none
 0
 false
@@ -210,7 +210,7 @@ West Dungeon
 Description: Dungeon room with skulls, prisoners bones, chains, and metal shackles.
 r22
 M3, M4, M5
-p6
+P6
 K4
 0
 false
@@ -228,7 +228,7 @@ East Dungeon
 Description: Dungeon room with skulls, prisoners bones, chains, and metal shackles.
 r24
 M6
-p7
+P7
 K5
 0
 false
@@ -246,7 +246,7 @@ West Burial Chamber
 Description: A chamber that is used as a grave for the Kings nobles and the human remains are placed on manmade beds within the walls. 
 r26, r29
 M3, M4, M5
-p8
+P8
 K6
 0
 false

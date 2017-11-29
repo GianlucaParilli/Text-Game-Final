@@ -211,9 +211,20 @@ public class Controller {
 						if(roomTemp.getRoomName().equals(dropdown) && roomTemp.isLooted() == false)
 						{
 							roomTemp.setSearched(true);
-							
-							item.viewItems(roomTemp.getItem());
+							if(roomTemp.getItem().equals("none")) {
+								System.out.println("noneeeee");
+								item.setItemDescription("nothing");
+								
+								room.disableButton(LostTreasureMain.gui.pickupItem);
+								room.disableButton(LostTreasureMain.gui.examine);
 
+
+								
+								//item.setItemDescription("nothing");
+							}
+								else {
+							item.viewItems(roomTemp.getItem());
+								}
 							//System.out.println(roomTemp.isSearched() + "sss");
 
 							room.enableButtons(LostTreasureMain.gui.pickupItem);
