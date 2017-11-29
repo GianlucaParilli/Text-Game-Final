@@ -32,7 +32,7 @@ public class GUI extends Login implements Observer {
 	private String currentPicture = "0";
     boolean isCorrectAnswerSelected = true;
     boolean isSelected = true;
-    Label hp;
+    static Label hp;
 
     
 	public ComboBox<String> getRoomsDropDown() {
@@ -217,7 +217,7 @@ public class GUI extends Login implements Observer {
 		HBox hBox = new HBox(20);
 		hBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
 				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
-		hp = new Label("HP: 100/100");
+		hp = new Label(Character.player.getCharHealth() + "/1000 HP");
 		hp.setFont(Font.font("Verdana", 20));
 		hBox.getChildren().add(hp);
 		return hBox;

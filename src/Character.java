@@ -56,11 +56,16 @@ public class Character extends Observable{
 	}
 
 	public int getCharHealth() {
+		setChanged();
+		notifyObservers(charHealth);
 		return charHealth;
+		
 	}
 
 	public void setCharHealth(int charHealth) {
 		this.charHealth = charHealth;
+		setChanged();
+		notifyObservers(charHealth);
 	}
 	
 

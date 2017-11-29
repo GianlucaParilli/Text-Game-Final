@@ -149,9 +149,11 @@ public class Monster extends Observable {
 				if (currentHP > 0) {
 					setUpdateMVC("You attacked a "+ monsterTemp.getMonsterName() +"\n\n\n"+ 
 					"Monster's HP "+currentHP + "\n\n"+ "Player's HP "+playerHP);
+					GUI.hp.setText(Character.player.getCharHealth() + "/1000 HP");
 				} else {
 				setUpdateMVC("You attacked a "+ monsterTemp.getMonsterName() +"\n\n\n"+ 
 				"Monster's HP "+ "0" + "\n\n"+ "Player's HP "+playerHP);
+				GUI.hp.setText(Character.player.getCharHealth() + "/1000 HP");
 				}
 			}else{
 				setUpdateMVC("You defeated the "+ monsterTemp.getMonsterName() +"\n\n\n");
