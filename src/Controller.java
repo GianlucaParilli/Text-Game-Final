@@ -202,6 +202,7 @@ public class Controller {
 				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
 		monsterDescription.setMinWidth(300);
 		monsterDescription.setMaxHeight(200);
+		monsterDescription.setMaxWidth(200);
 		monster.descriptionText = new Label();
 		monster.descriptionText.setFont(Font.font("Verdana", 15));
 		monster.descriptionText.setWrapText(true);
