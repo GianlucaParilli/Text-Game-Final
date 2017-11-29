@@ -26,6 +26,7 @@ public class Puzzles extends Observable {
 	private String puzzleDescription;
 	private String puzzleAnswer;
 	private String puzzleHint;
+	private int currentRoom;
 	private static ArrayList<Puzzles> puzzlesArray = new ArrayList<>();
 	private static ArrayList<String> puzzlesAnswerArray = new ArrayList<>();
 	Label descriptionText = new Label();
@@ -109,6 +110,8 @@ public class Puzzles extends Observable {
 			System.out.println("answer");
 		});
 		hint.setOnAction(e->{
+
+			
 			
 		});
 		exit.setOnAction(e -> {
@@ -122,19 +125,20 @@ public class Puzzles extends Observable {
 
 		});	
 		//description pane for popUp
-		HBox monsterDescription = new HBox(15);
-		monsterDescription.setMinHeight(300);
-		monsterDescription.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
+		HBox puzzleDescription = new HBox(15);
+		puzzleDescription.setMinHeight(300);
+		puzzleDescription.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
 				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
-		monsterDescription.setMinWidth(300);
-		monsterDescription.setMaxHeight(200);
+		puzzleDescription.setMinWidth(300);
+		puzzleDescription.setMaxHeight(200);
 		descriptionText = new Label();
 		descriptionText.setFont(Font.font("Verdana", 15));
 		descriptionText.setWrapText(true);
-		monsterDescription.setPadding(new Insets(15, 15, 15, 15));
+		puzzleDescription.setPadding(new Insets(15, 15, 15, 15));
 		// sets the text from the radio buttons to the description box
-		descriptionText.setText("sfgsfdgsdfsd");
-		monsterDescription.getChildren().add(descriptionText);
+		
+		descriptionText.setText(ViewPuzzle(currentRoom));
+		puzzleDescription.getChildren().add(descriptionText);
 		
 		//pane for buttons
 		BorderPane hBox = new BorderPane();
@@ -156,7 +160,7 @@ public class Puzzles extends Observable {
 		GridPane pane = new GridPane();
 		pane.setHgap(5);
 		// node,column,row
-		pane.add(monsterDescription, 0, 0);
+		pane.add(puzzleDescription, 0, 0);
 		pane.add(hBox, 0, 1);
 		popUp.getDialogPane().setContent(pane);
 		popUp.show();		
