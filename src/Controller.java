@@ -1,14 +1,5 @@
-import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
+
 
 public class Controller {
 	// Monster monster;
@@ -196,7 +187,7 @@ public class Controller {
 			temp.setId(item.getItemDescription());
 			temp.setOnAction(e -> {
 				item.addObserver(LostTreasureMain.gui);
-				//item.viewItems(room.getCurrentRoom());
+				item.viewItems(room.getItem());
 				//System.out.println("current "+room.getCurrentRoom());
 				
 				for(Rooms roomTemp : room.getRoomsArray()){

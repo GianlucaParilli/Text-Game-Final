@@ -32,6 +32,7 @@ public class GUI extends Login implements Observer {
 	private String currentPicture = "0";
     boolean isCorrectAnswerSelected = true;
     boolean isSelected = true;
+    Label hp;
 
     
 	public ComboBox<String> getRoomsDropDown() {
@@ -216,7 +217,7 @@ public class GUI extends Login implements Observer {
 		HBox hBox = new HBox(20);
 		hBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
 				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
-		Label hp = new Label("HP: 100/100");
+		hp = new Label("HP: 100/100");
 		hp.setFont(Font.font("Verdana", 20));
 		hBox.getChildren().add(hp);
 		return hBox;
@@ -298,6 +299,10 @@ public class GUI extends Login implements Observer {
 		}
 		else if( o instanceof Monster) {
 			descriptionText.setText(arg.toString());
+			if(((Monster) o).attackButtonClicked()) {
+				((Monster)o).descriptionText.setText(arg.toString());
+			}
+			
 		} 
 		else if( o instanceof Items) {
 			if(((Items)o).hasSearchedRoom(searchRoom.isArmed()) )

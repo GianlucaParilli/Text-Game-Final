@@ -3,11 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
-
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -16,10 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 public class Monster extends Observable {
 	
@@ -37,6 +31,7 @@ public class Monster extends Observable {
 	private int HP;
 	private int currentHP;
 	private int monsterDamage;
+	private String updateMVC;
 	private String currentMonsterName;
 	private static ArrayList<Monster> monstersArray = new ArrayList<>();
 	private static ArrayList<Monster> savedState = new ArrayList<>();
@@ -83,10 +78,9 @@ public class Monster extends Observable {
 	}
 	
 	public String ViewMonster(int currentRoom) {
-		System.out.println("mmmaaa "+ getCurrentMonsterName());
-		System.out.println("setter " + getMonstersArray().get(currentMonster(getCurrentMonsterName())).getMonsterName());
-		setMonsterDescription("You have encountered a " + getCurrentMonsterName() + "\n\n\n" + "Wanna fight it?"
-							 + "\n\n" + "Wanna Flee?");
+		//System.out.println("mmmaaa "+ getCurrentMonsterName());
+		//System.out.println("setter " + getMonstersArray().get(currentMonster(getCurrentMonsterName())).getMonsterName());
+		setMonsterDescription("You have encountered a " + getCurrentMonsterName() );
 		return monsterDescription;
 		
 	}
@@ -112,6 +106,13 @@ public class Monster extends Observable {
 	
 	}
 
+	public void setUpdateMVC(String updateMVC) {
+		this.updateMVC = updateMVC;
+		System.out.println("update " + updateMVC);
+		setChanged();
+		notifyObservers(updateMVC);
+	}
+
 	public void attackPopUp(Button attack, Button flee, Rooms room, Monster monster) {
 
 		Monster monsterTemp = monster.getMonstersArray().get(monster.getCurrentMonster());
@@ -134,7 +135,8 @@ public class Monster extends Observable {
 		popUp.getButtonTypes().remove(ButtonType.CANCEL);
 
 		attack.setOnAction(e -> {
-	
+			monster.addObserver(LostTreasureMain.gui);
+			Monster monsterTemp = monster.getMonstersArray().get(monster.currentMonster);	
 			int currentHP = monsterTemp.getHP();
 			int monDamage = monsterTemp.getDamageGiven();
 			int damage = Character.player.getCharDamage();	
@@ -143,13 +145,17 @@ public class Monster extends Observable {
 			if (currentHP > 0) {
 				System.out.println("Attacked NOWWW");
 				currentHP = currentHP - damage;
+				System.out.println("current monster Hp "+currentHP);
 				monsterTemp.setHP(currentHP);
-				System.out.println(currentHP);
-				
 				Character.player.setCharHealth(playerHP - monDamage);
 				System.out.println("Player HP: " + playerHP);
+				setUpdateMVC("You attacked a "+ monsterTemp.getMonsterName() +"\n\n\n"+ 
+				"Monster's HP "+currentHP + "\n\n"+ "Player's HP "+playerHP);
 			}else{
+				setUpdateMVC("You defeated the "+ monsterTemp.getMonsterName() +"\n\n\n");
 				System.out.println("Monster has been defeated!");
+				LostTreasureMain.gui.examineMonster.setDisable(true);
+
 				popUp.close();
 				monsterTemp.setDead(true);
 				System.out.println(monsterTemp.isDead());
@@ -162,7 +168,7 @@ public class Monster extends Observable {
 		
 		flee.setOnAction(e -> {
 			monster.addObserver(LostTreasureMain.gui);
-
+		
 			monster.FleeMonster(room.getCurrentRoom());
 			// quits and closes the gui
 			popUp.close();
@@ -213,7 +219,9 @@ public class Monster extends Observable {
 		notifyObservers(fleeMonster);
 		
 	}
-	
+	public boolean attackButtonClicked() {
+		return true;
+	}
 	public String FleeMonster(int currentRoom){
 		System.out.println(currentRoom);
 		setFleeMonster("You have fled the monster, no experience gained");
@@ -296,7 +304,10 @@ public class Monster extends Observable {
 		return monsterID + " | " + monsterDescription + " | " + EXP + " | " + damageGiven + " | " + healthPoints + "|" +
 				attackPercentage + "|" + artifactsDropped + "|";
 	}
-
+	public void setDamageGiven(int damageGiven) {
+		this.damageGiven = damageGiven;
+		
+	}
 	public String getMonsterID() {
 		return monsterID;
 	}
@@ -324,10 +335,6 @@ public class Monster extends Observable {
 
 	public int getDamageGiven() {
 		return damageGiven;
-	}
-
-	public void setDamageGiven(int damageGiven) {
-		this.damageGiven = damageGiven;
 	}
 
 	public String getHealthPoints() {
@@ -387,6 +394,7 @@ public class Monster extends Observable {
 
 	public void setHP(int hP) {
 		HP = hP;
+			
 	}
 
 	public int getCurrentHP() {

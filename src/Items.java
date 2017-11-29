@@ -113,6 +113,7 @@ public class Items extends Observable {
 
 	public void viewItems(String itemID){
 		//System.out.println(getItemsArray().get(currentRoom).getItemName());
+		
 		setItemDescription(getItemsArray().get(currentItem(itemID)).getItemName());
 		//return itemDescription;
 	}

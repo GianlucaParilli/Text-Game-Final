@@ -132,7 +132,7 @@ public class Puzzles extends Observable {
 		hint.setOnAction(e->{
 
 			setPuzzleHint(getPuzzlesArray().get(currentRoom).getPuzzleHint());
-			
+			System.out.println("blah");
 			
 		});
 		exit.setOnAction(e -> {
