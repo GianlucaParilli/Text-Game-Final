@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
-
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -21,131 +21,75 @@ import javafx.scene.text.Font;
 
 public class Puzzles extends Observable {
 
+	/**
+	 * @author Gianluca Parilli
+	 * @version 1.0
+	 * @Course : ITEC 3860, Fall, 2017 Written: November 8, 2017
+	 * 
+	 */
 	private String puzzleID;
 	private String puzzleDescription;
 	private String puzzleAnswer;
 	private String puzzleHint;
 	private int currentRoom;
+	private boolean solved;
 	private static ArrayList<Puzzles> puzzlesArray = new ArrayList<>();
-	private static ArrayList<String> puzzlesAnswerArray = new ArrayList<>();
 	Label descriptionText = new Label();
-
-
-	//private ArrayList<> puzzles = new ArrayList<>();
-
+/*
+ * puzzle constructor that calls the file reader for the puzzle.txt file
+ */
 	public Puzzles() {
 		try {
 			puzzleReader();
-			puzzleAnswers(getPuzzlesArray());
 
-		} catch(FileNotFoundException e){
+		} catch (FileNotFoundException e) {
 			System.out.println("No File Found");
 		}
 	}
 
-	public Puzzles(String puzzleID, String puzzleDescription, String puzzleAnswer, String puzzleHint)
-	{
+	public Puzzles(String puzzleID, String puzzleDescription, String puzzleAnswer, String puzzleHint, boolean solved) {
 		this.puzzleID = puzzleID;
 		this.puzzleDescription = puzzleDescription;
 		this.puzzleAnswer = puzzleAnswer;
 		this.puzzleHint = puzzleHint;
+		this.solved = solved;
 
 	}
-	
-	
-	
-	
+
 	public int currentPuzzle(String puzzleID) {
-		int currentID=0;
-		//System.out.println("monsters position " +getMonstersArray().get(0));
-		for(Puzzles m : getPuzzlesArray()) {
-			if(m.getPuzzleID().equals(puzzleID)) {
-				currentID = getPuzzlesArray().indexOf(m);
-				System.out.println("current monster " + m.getPuzzleDescription());
-				setPuzzleDescription((m.getPuzzleDescription()));
+		int currentID = 0;
+		// System.out.println("monsters position " +getMonstersArray().get(0));
+		for (Puzzles p : getPuzzlesArray()) {
+			if (p.getPuzzleID().equals(puzzleID)) {
+				currentID = getPuzzlesArray().indexOf(p);
+				// System.out.println("current monster " + m.getPuzzleDescription());
+				setPuzzleDescription((p.getPuzzleDescription()));
 
 			}
 		}
-		System.out.println("current monster position " + currentID);
+		System.out.println("current puzzle position " + currentID);
 
 		return currentID;
 	}
 
-	public void puzzlePopUp(ArrayList<String> puzzleArray) {
-		Alert popUp = new Alert(AlertType.INFORMATION);
-		popUp.setTitle("Inventory");
-		popUp.setHeaderText("Select an item");
-		ImageView logo = new ImageView("logo.png");
-		logo.setFitWidth(64);
-	    logo.setFitHeight(64);
-		popUp.setGraphic(logo);
-		VBox pop = new VBox();
-		pop.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
-				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
-		pop.setPadding(new Insets(50, 50, 50, 50));
-		RadioButton cb; 
-		RadioButton egg;
-		ToggleGroup toggleGroup = new ToggleGroup();
 
-		for (String temp : puzzleArray) {
-			System.out.println("h"+temp);
-			//cb = new RadioButton(temp.getPuzzleAnswer());
-			egg = new RadioButton("  "+temp);
-			//cb.setFont(Font.font("Verdana", 16));
 
-			egg.setToggleGroup(toggleGroup);
-			pop.getChildren().add(egg);
-			//System.out.println(puzzleArray.get(0));
-			if (puzzlesArray.get(0).getPuzzleAnswer().equals("Mountain")) {
-				//pop.getChildren().add(cb);
-				egg.setOnAction(e -> {
-					//System.out.println("wrong");
-				});
-			}
-		}
-		popUp.getDialogPane().setContent(pop);
-		popUp.show();
-	}
-	public void puzzlePopUp(Button answer, Button hint, Button exit, Rooms room) {
-		
-		Alert popUp = new Alert(AlertType.NONE);
+	// public void puzzlePopUp(Button answer, Button hint, Button exit, Rooms room)
+	// {
+	public void puzzlePopUp(Rooms room) {
+		Alert popUp = new Alert(AlertType.CONFIRMATION);
 		popUp.setTitle("Puzzle");
 		popUp.setHeaderText("Puzzle");
 		popUp.setResizable(true);
 		popUp.setWidth(150);
 		ImageView logo = new ImageView("logo.png");
 		logo.setFitWidth(64);
-	    logo.setFitHeight(64);
+		logo.setFitHeight(64);
 		popUp.setGraphic(logo);
-		answer = new Button("answer");
-		hint = new Button("Hint");	
-		exit = new Button("Exit");
-		popUp.getButtonTypes().add(ButtonType.CANCEL);
+		popUp.getButtonTypes().add(ButtonType.CLOSE);
 		popUp.hide();
-		popUp.getButtonTypes().remove(ButtonType.CANCEL);
+		popUp.getButtonTypes().remove(ButtonType.CLOSE);
 
-		answer.setOnAction(e->{
-			System.out.println("answer");
-			addObserver(LostTreasureMain.gui);
-			
-		});
-		hint.setOnAction(e->{
-			addObserver(LostTreasureMain.gui);
-			setPuzzleHint(getPuzzlesArray().get(currentRoom).getPuzzleHint());
-			System.out.println("blah");
-			
-		});
-		exit.setOnAction(e -> {
-			addObserver(LostTreasureMain.gui);
-			
-			//FleeMonster(room.getCurrentRoom());
-			// quits and closes the gui
-			popUp.close();
-
-			System.out.println("closed");
-
-		});	
-		//description pane for popUp
 		HBox puzzleDescription = new HBox(15);
 		puzzleDescription.setMinHeight(300);
 		puzzleDescription.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
@@ -154,64 +98,98 @@ public class Puzzles extends Observable {
 		puzzleDescription.setMaxHeight(200);
 		puzzleDescription.setMaxWidth(200);
 
-		//descriptionText = new Label();
-		//descriptionText.setFont(Font.font("Verdana", 15));
-		//descriptionText.setWrapText(true);
-		puzzleDescription.setPadding(new Insets(15, 15, 15, 15));
-		RadioButton cb; 
-		//RadioButton StarsButton;
-		//RadioButton TreesButton;
-		//RadioButton FlowersButton;
-		//RadioButton MountainButton;
-		ToggleGroup toggleGroup = new ToggleGroup();
-		VBox vpane = new VBox();
-		
-		for (String temp :puzzlesAnswerArray) {
-			cb = new RadioButton(temp);
-			//StarsButton = new RadioButton(temp);
-			//StarsButton = new RadioButton(temp);
-			cb.setFont(Font.font("Verdana", 16));
+		descriptionText = new Label();
+		descriptionText.setFont(Font.font("Verdana", 22));
+		descriptionText.setWrapText(true);
 
-			cb.setToggleGroup(toggleGroup);
-			vpane.getChildren().add(cb);
-			if (temp.equals(cb.getText())) {
-				cb.setOnAction(e -> {
-					System.out.println(temp);
-				});
+		puzzleDescription.setPadding(new Insets(15, 15, 15, 15));
+		Button button;
+		VBox picPane = new VBox(10);
+		picPane.setStyle("-fx-padding: 15;" + "-fx-border-insets: 10;" + "-fx-border-radius: 10;");
+		VBox picPane1 = new VBox(10);
+		picPane1.setStyle("-fx-padding: 15;" + "-fx-border-insets: 10;" + "-fx-border-radius: 10;");
+
+		int counter = 0;
+		for (Puzzles temp : getPuzzlesArray()) {
+			if (counter < 4) {
+				Image img1 = new Image(getClass().getResourceAsStream("puzzles/" + temp.getPuzzleID() + ".png"));
+				ImageView image = new ImageView(img1);
+				image.setFitWidth(48);
+				image.setFitHeight(48);
+				button = new Button("", image);
+				button.setId(temp.getPuzzleID());
+
+				picPane.getChildren().add(button);
+				if (temp.getPuzzleID().equals(button.getId())) {
+					button.setOnAction(e -> {
+						// System.out.println(getPuzzlesArray().get(currentRoom).getPuzzleID());
+						// System.out.println(temp.getPuzzleID());
+						if (getPuzzlesArray().get(currentRoom).getPuzzleID().equals(temp.getPuzzleID())) {
+							System.out.println("correct");
+							addObserver(LostTreasureMain.gui);
+							setPuzzleHint("correct");
+							temp.setSolved(true);
+							popUp.close();
+						} else {
+							System.out.println("not correct");
+							addObserver(LostTreasureMain.gui);
+							setPuzzleHint("you clicked on the wrong answer, try again");
+						}
+						// System.out.println(temp.getPuzzleAnswer());
+					});
+				}
 			}
+			if (counter >= 4 && counter < 9) {
+				Image img1 = new Image(getClass().getResourceAsStream("puzzles/" + temp.getPuzzleID() + ".png"));
+				ImageView image = new ImageView(img1);
+				image.setFitWidth(48);
+				image.setFitHeight(48);
+				button = new Button("", image);
+				button.setId(temp.getPuzzleID());
+
+				picPane1.getChildren().add(button);
+				if (temp.getPuzzleID().equals(button.getId())) {
+					button.setOnAction(e -> {
+						// System.out.println(getPuzzlesArray().get(currentRoom).getPuzzleID());
+						// System.out.println(temp.getPuzzleID());
+						if (getPuzzlesArray().get(currentRoom).getPuzzleID().equals(temp.getPuzzleID())) {
+							// System.out.println("correct");
+							addObserver(LostTreasureMain.gui);
+							setPuzzleHint("You answered the puzzle correctly!!!");
+							temp.setSolved(true);
+							popUp.close();
+						} else {
+							System.out.println("not correct");
+							addObserver(LostTreasureMain.gui);
+							setPuzzleHint("You clicked on the wrong answer, try again");
+						}
+						// System.out.println(temp.getPuzzleAnswer());
+					});
+				}
+
+			}
+			counter++;
 		}
 
 		// sets the text from the radio buttons to the description box
-		
 		descriptionText.setText(getPuzzleDescription());
 		puzzleDescription.getChildren().add(descriptionText);
-		
-		//pane for buttons
+		// pane for buttons
 		BorderPane hBox = new BorderPane();
-		//answer.setTranslateX(20);
-		//hint.setTranslateX(50);
-		//exit.setTranslateX(90);
-		hBox.setLeft(answer);
-		hBox.setCenter(hint);
-		hBox.setRight(exit);
-		//hBox.getChildren().add(answer);
-		//hBox.getChildren().add(hint);
-		//hBox.getChildren().add(exit);
-
-		
 
 		// adding the action listener from the controller class
-
 		GridPane pane = new GridPane();
 		pane.setHgap(5);
 		// node,column,row
 		pane.add(puzzleDescription, 0, 0);
-		pane.add(vpane, 1, 0);
+		pane.add(picPane, 1, 0);
+		pane.add(picPane1, 2, 0);
 		pane.add(hBox, 0, 2);
 		popUp.getDialogPane().setContent(pane);
-		popUp.show();		
-	
+		popUp.show();
+
 	}
+
 	public void setPuzzleDescription(String puzzleDescription) {
 		this.puzzleDescription = puzzleDescription;
 		setChanged();
@@ -223,14 +201,14 @@ public class Puzzles extends Observable {
 		setChanged();
 		notifyObservers(puzzleHint);
 	}
-	
+
 	public void setPuzzleAnswer(String puzzleAnswer) {
 		this.puzzleAnswer = puzzleAnswer;
 		setChanged();
 		notifyObservers(puzzleAnswer);
 	}
 
-	public String ViewPuzzle(int currentRoom) { 
+	public String ViewPuzzle(int currentRoom) {
 		System.out.println(currentRoom);
 		setPuzzleDescription(getPuzzlesArray().get(currentRoom).getPuzzleDescription());
 		return puzzleDescription;
@@ -242,13 +220,14 @@ public class Puzzles extends Observable {
 		setPuzzleHint(getPuzzlesArray().get(currentRoom).getPuzzleHint());
 		return puzzleHint;
 	}
-	
-	public String ViewAnswer(int currentRoom){
-		System.out.println(currentRoom);
+
+	public String ViewAnswer(int currentRoom) {
+		System.out.println("View puzzle "+currentRoom);
 		setPuzzleAnswer(getPuzzlesArray().get(currentRoom).getPuzzleAnswer());
 		return puzzleAnswer;
 
 	}
+
 	public boolean puzzleButtonClicked() {
 		return true;
 	}
@@ -257,14 +236,15 @@ public class Puzzles extends Observable {
 		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(new File("puzzle.txt"));
 
-		while(reader.hasNext()){
+		while (reader.hasNext()) {
 
 			String puzzleID = reader.nextLine();
 			String puzzleDescription = reader.nextLine();
 			String puzzleAnswer = reader.nextLine();
 			String puzzleHint = reader.nextLine();
+			boolean solved = false;
 
-			Puzzles puzzle = new Puzzles(puzzleID, puzzleDescription, puzzleAnswer, puzzleHint);
+			Puzzles puzzle = new Puzzles(puzzleID, puzzleDescription, puzzleAnswer, puzzleHint, solved);
 			puzzlesArray.add(puzzle);
 
 		}
@@ -274,19 +254,21 @@ public class Puzzles extends Observable {
 	public String toString() {
 		return puzzleID + " | " + puzzleDescription + " | " + puzzleAnswer + " | " + puzzleHint + " | ";
 	}
-	public void puzzleAnswers(ArrayList<Puzzles>temp) {
-		for(Puzzles pz : temp) {
-			getPuzzlesAnswerArray().add(pz.getPuzzleAnswer());
-		}
-	}
-	//d
+
+//	public void puzzleAnswers(ArrayList<Puzzles> temp) {
+//		for (Puzzles pz : temp) {
+//			getPuzzlesAnswerArray().add(pz.getPuzzleAnswer());
+//		}
+//	}
+
 	public String getPuzzleID() {
 		return puzzleID;
 	}
 
-	public void setPuzzleID(String puzzleID) {
-		this.puzzleID = puzzleID;
-	}
+//	public void setPuzzleID(String puzzleID) {
+//		this.puzzleID = puzzleID;
+//	}
+
 	public String getPuzzleDescription() {
 		return puzzleDescription;
 	}
@@ -296,7 +278,7 @@ public class Puzzles extends Observable {
 	}
 
 	public String getPuzzleHint() {
-	
+
 		return puzzleHint;
 	}
 
@@ -304,13 +286,17 @@ public class Puzzles extends Observable {
 		return puzzlesArray;
 	}
 
-	public  ArrayList<String> getPuzzlesAnswerArray() {
-		return puzzlesAnswerArray;
+	public boolean isSolved() {
+		return solved;
 	}
 
-	public void setPuzzlesAnswerArray(ArrayList<String> puzzlesAnswerArray) {
-		Puzzles.puzzlesAnswerArray = puzzlesAnswerArray;
+	public void setSolved(boolean solved) {
+		this.solved = solved;
 	}
 
+	public int getCurrentRoom() {
+		return currentRoom;
+	}
+	
 
 }

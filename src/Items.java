@@ -13,12 +13,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 /**
- * @author Humberto Michael Lopez
- * @version 1.0 
+ * @author Gianluca Parilli, Humberto Michael Lopez
+ * @version 1.0
  * @Course : ITEC 3860, Fall, 2017 Written: November 8, 2017
- *  
+ * 
  */
 
+/*
+ * item class, reads from a text file and creates item objects according to the
+ * text file generates the popup for item inventory and assigns listeners to
+ * those buttons
+ */
 public class Items extends Observable {
 
 	private String itemID;
@@ -33,8 +38,12 @@ public class Items extends Observable {
 	private ArrayList<String> keys = new ArrayList<>();
 	private ArrayList<String> keysID = new ArrayList<>();
 
-
-	public Items( String itemID, String itemName, String itemDescription, String itemType, String itemUsage, int itemStrength,  int availability){
+	/*
+	 * Constructor that creates a item object with its specific attributes depending
+	 * on what it is in the text file
+	 */
+	public Items(String itemID, String itemName, String itemDescription, String itemType, String itemUsage,
+			int itemStrength, int availability) {
 		this.itemID = itemID;
 		this.itemName = itemName;
 		this.itemDescription = itemDescription;
@@ -43,90 +52,100 @@ public class Items extends Observable {
 		this.itemStrength = itemStrength;
 		this.availability = availability;
 	}
-	
+
+	/*
+	 * empty constructor used to call the class object and it creates the objects
+	 * using the file i/o reader
+	 */
 	public Items() {
 		try {
+			// calls the reader for teh artifact.txt file
+			// sets all the lines in the text file into an object item.
 			itemsReader();
-			keys(itemsArray);
 		} catch (FileNotFoundException e) {
 			System.out.println("No File Found");
 		}
 	}
-	
-	public void inventoryPopUp(ArrayList<String> inventoryArray) {
+
+	/*
+	 * method that creates a alert pop up with all the panes required to format the
+	 * look of the pop up takes and inventory, character and room object in order to
+	 * call it from teh controller class which is the only class that has those
+	 * object initialized
+	 */
+	public void inventoryPopUp(ArrayList<String> inventoryArray, Character character, Rooms room) {
 		Alert popUp = new Alert(AlertType.INFORMATION);
 		popUp.setTitle("Inventory");
 		popUp.setHeaderText("Select an item");
 		ImageView logo = new ImageView("logo.png");
 		logo.setFitWidth(64);
-	    logo.setFitHeight(64);
+		logo.setFitHeight(64);
 		popUp.setGraphic(logo);
 		VBox pop = new VBox();
 		pop.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
 				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
 		pop.setPadding(new Insets(50, 50, 50, 50));
-		RadioButton cb; 
+		RadioButton cb;
 		ToggleGroup toggleGroup = new ToggleGroup();
-
+		// it reads what is in the inventory array and creates the appropriate radio
+		// button for the item
 		for (String temp : inventoryArray) {
 			cb = new RadioButton(temp);
 			cb.setFont(Font.font("Verdana", 16));
-
 			cb.setToggleGroup(toggleGroup);
+			// adds the radio button into the pane to display it
 			pop.getChildren().add(cb);
+			// matches the radionButton to the actual inventory item in the inventory array
 			if (temp.equals(cb.getText())) {
 				cb.setOnAction(e -> {
+					System.out.println("k " + temp);
+					//
 					for (Items itemTemp : getItemsArray()) {
-						if (itemTemp.getItemID() == "W1") {
-							int currentDamage = Character.player.getCharDamage();
-							int itemBonus = 10;
-							System.out.println("HEYYY");
-							Character.player.setCharDamage(currentDamage + itemBonus);
-						}else if(itemTemp.getItemID() == "W2") {
-							int currentDamage = Character.player.getCharDamage();
-							int itemBonus = 10;
-							System.out.println("HEYYY");
-							Character.player.setCharDamage(currentDamage + itemBonus);
-						}else if(itemTemp.getItemID() == "W3") {
-							int currentHealth = Character.player.getCharHealth();
-							int itemBonus = 50;
-							System.out.println("HEYYY");
-							Character.player.setCharHealth(currentHealth + itemBonus);
-						}else if(itemTemp.getItemID() == "W4") {
-							int currentDamage = Character.player.getCharDamage();
-							int itemBonus = 50;
-							System.out.println("HEYYY");
-							Character.player.setCharDamage(currentDamage + itemBonus);
-						}else if(itemTemp.getItemID() == "W6") {
-							int currentHealth = Character.player.getCharHealth();
-							int itemBonus = 50;
-							System.out.println("HEYYY");
-							Character.player.setCharHealth(currentHealth + itemBonus);
-						}else if(itemTemp.getItemID() == "H1") {
-							int currentHealth = Character.player.getCharHealth();
-							int itemBonus = 10;
-							System.out.println("HEYYY");
-							Character.player.setCharHealth(currentHealth + itemBonus);
-						}else if(itemTemp.getItemID() == "H2") {
-							int currentHealth = Character.player.getCharHealth();
-							int itemBonus = 100;
-							System.out.println("HEYYY");
-							Character.player.setCharHealth(currentHealth + itemBonus);
-						}else if(itemTemp.getItemID() == "H3") {
-							int currentHealth = Character.player.getCharHealth();
-							int itemBonus = 20;
-							System.out.println("HEYYY");
-							Character.player.setCharHealth(currentHealth + itemBonus);
-						}else if(itemTemp.getItemID() == "H4") {
-							int currentHealth = Character.player.getCharHealth();
-							int itemBonus = 10;
-							System.out.println("HEYYY");
-							Character.player.setCharHealth(currentHealth + itemBonus);
-						}else if(itemTemp.getItemID() == "H5") {
-							int currentHealth = Character.player.getCharHealth();
-							int itemBonus = 5;
-							System.out.println("HEYYY");
-							Character.player.setCharHealth(currentHealth + itemBonus);
+						if (itemTemp.getItemName().equals(temp)) {
+							System.out.println("" + temp);
+							// if there object has a type of weapon it will set the damage according to the
+							// weapon logic
+							if (itemTemp.getItemType().equals("Weapon")) {
+								int itemBonus = itemTemp.getItemStrength() + character.getCharDamage();
+								character.setCharDamage(itemBonus);
+								// .out.println(itemBonus + "w" );
+							}
+							if (itemTemp.getItemType().equals("Health Item")) {
+								int itemBonus = itemTemp.getItemStrength() + character.getCharHealth();
+								character.setCharHealth(itemBonus);
+								System.out.println(itemBonus + "health");
+							}
+							if (itemTemp.getItemType().equals("Navigation")) {
+								character.setNav(true);
+							}
+							if (itemTemp.getItemType().equals("Storage")) {
+								character.setBag(true);
+							}
+							// if the item object is type key and the ID matches then it unlocks the right
+							// room
+							if (itemTemp.getItemType().equals("Key")) {
+								if (itemTemp.getItemID().equals("K1")) {
+									room.getRoomsArray().get(9).setLocked(false);
+								}
+								if (itemTemp.getItemID().equals("K2")) {
+									room.getRoomsArray().get(9).setLocked(false);
+								}
+								if (itemTemp.getItemID().equals("K3")) {
+									room.getRoomsArray().get(9).setLocked(false);
+								}
+								if (itemTemp.getItemID().equals("K4")) {
+									room.getRoomsArray().get(9).setLocked(false);
+								}
+								if (itemTemp.getItemID().equals("K5")) {
+									room.getRoomsArray().get(9).setLocked(false);
+								}
+								if (itemTemp.getItemID().equals("K6")) {
+									room.getRoomsArray().get(9).setLocked(false);
+								}
+								if (itemTemp.getItemID().equals("K7")) {
+									room.getRoomsArray().get(9).setLocked(false);
+								}
+							}
 						}
 					}
 				});
@@ -135,77 +154,81 @@ public class Items extends Observable {
 		popUp.getDialogPane().setContent(pop);
 		popUp.show();
 	}
-	
-	public boolean unlockDoor() {
-		return false;
-	}
-	public void keys(ArrayList<Items> keys) {
-		for(Items keyTemp : keys) {
-			if(keyTemp.itemType.equals("Key")) {
-				getKeys().add(keyTemp.itemName);
-				getKeysID().add(keyTemp.itemID);
-				//System.out.println(""+keyTemp.getItemName());
-				//System.out.println(""+keyTemp.getItemID());
 
-			}
-		}
-	}
+	/*
+	 * method that sets the description of the item and notifies the observer in
+	 * which then updates the gui
+	 */
 	public void setItemDescription(String itemDescription) {
 		this.itemDescription = itemDescription;
 		setChanged();
 		notifyObservers(itemDescription);
 	}
-	
+
+	/*
+	 * method that sets the name of the item and notifies the observer in which then
+	 * updates the gui
+	 */
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 		setChanged();
 		notifyObservers(itemName);
 	}
 
-
-	public void viewItems(String itemID){
-		//System.out.println(getItemsArray().get(currentRoom).getItemName());
-		
+	/*
+	 * method that takes a string with the item id and calls the setter which then
+	 * updates the text in the gui, using the MVC
+	 */
+	public void viewItems(String itemID) {
 		setItemDescription(getItemsArray().get(currentItem(itemID)).getItemName());
-		//return itemDescription;
+		// return itemDescription;
 	}
 
+	/*
+	 * method that take the item id and finds the current index of the specific item
+	 */
 	public int currentItem(String itemID) {
-		int currentID=0;
+		int currentID = 0;
 		System.out.println(getItemsArray().get(1));
-		for(Items temp : getItemsArray()) {
-			if(temp.getItemID().equals(itemID)) {
+		for (Items temp : getItemsArray()) {
+			if (temp.getItemID().equals(itemID)) {
 				currentID = getItemsArray().indexOf(temp);
 				System.out.println("current item position " + currentID);
 			}
 		}
 		return currentID;
 	}
+
+	/*
+	 * method that reads the artifact.txt file and creates item objects with their
+	 * respective attributes
+	 */
 	public void itemsReader() throws FileNotFoundException {
 		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(new File("artifact.txt"));
-		
-
-		while(reader.hasNext()){
+		while (reader.hasNext()) {
 			String itemID = reader.nextLine();
 			String itemName = reader.nextLine();
 			String itemDescription = reader.nextLine();
 			String itemType = reader.nextLine();
 			String itemUsage = reader.nextLine();
-			
 			String itmStrStr = reader.nextLine();
-			String digits = itmStrStr.replaceAll("[^0-9.]","");
+			String digits = itmStrStr.replaceAll("[^0-9.]", "");
 			int itemStrength = Integer.parseInt(digits);
-			
 			int availability = 1;
 			Items items = new Items(itemID, itemName, itemDescription, itemType, itemUsage, itemStrength, availability);
 			itemsArray.add(items);
 		}
 	}
-	public boolean hasSearchedRoom(boolean bool){
 
+	/*
+	 * method used to indicate that an item has been searched, if called, disables
+	 * the button for the used to not search the room again
+	 */
+	public boolean hasSearchedRoom(boolean bool) {
 		return bool;
 	}
+
 	public ArrayList<Items> getItemsArray() {
 		return itemsArray;
 	}
@@ -213,11 +236,10 @@ public class Items extends Observable {
 	public String getItemID() {
 		return itemID;
 	}
-	
-	public  ArrayList<String> getInventory() {
+
+	public ArrayList<String> getInventory() {
 		return inventory;
 	}
-	
 
 	public ArrayList<String> getKeys() {
 		return keys;
@@ -226,7 +248,7 @@ public class Items extends Observable {
 	public void setKeys(ArrayList<String> keys) {
 		this.keys = keys;
 	}
-	
+
 	public void setInventory(ArrayList<String> inventory) {
 		this.inventory = inventory;
 	}
@@ -238,7 +260,6 @@ public class Items extends Observable {
 	public String getItemDescription() {
 		return itemDescription;
 	}
-
 
 	public String getItemType() {
 		return itemType;
@@ -263,15 +284,14 @@ public class Items extends Observable {
 	public void setItemStrength(int itemStrength) {
 		this.itemStrength = itemStrength;
 	}
-	
+
 	public String getItemName() {
 		return itemName;
 	}
-	
+
 	public ArrayList<String> getKeysID() {
 		return keysID;
 	}
-	
 
 	public int getAvailability() {
 		return availability;
@@ -280,21 +300,10 @@ public class Items extends Observable {
 	public void setAvailability(int availability) {
 		this.availability = availability;
 	}
-	public void equipItem() {
-		
-	}
-	
-	public void unequipItem() {
-		
-	}
-	
-	public void useItem() {
-		
-	}
 
 	@Override
 	public String toString() {
 		return itemDescription;
-		
+
 	}
 }

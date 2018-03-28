@@ -12,7 +12,13 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Login extends LostTreasureMain implements Observer {
+/**
+ * @author Gianluca Parilli
+ * @version 1.0
+ * @Course : ITEC 3860, Fall, 2017 Written: October 15, 2017
+ * 
+ */
+public class Login extends LostTreasureMain {
 	TextField userInput;
 	protected ArrayList<String> usernamesArray = new ArrayList<>();
 	protected ArrayList<Button> arrayButtons = new ArrayList<>();
@@ -24,8 +30,6 @@ public class Login extends LostTreasureMain implements Observer {
 	Button loadGameButton;
 	Rooms room = new Rooms();
 	// GUI gui = new GUI();
-
-
 
 	public void start(Stage primaryStage) throws InterruptedException {
 		BorderPane bPane = new BorderPane();
@@ -46,7 +50,7 @@ public class Login extends LostTreasureMain implements Observer {
 	// adds the topPane method(picture) to the v pane
 	// sets all the listeners for the buttons
 	private VBox mainPane() {
-		VBox vpane = new VBox();
+		VBox vpane = new VBox(5);
 		newGameButton = new Button("  New Game  ");
 		loadGameButton = new Button("  Load  ");
 		Button exitButton = new Button("  Exit  ");
@@ -71,12 +75,11 @@ public class Login extends LostTreasureMain implements Observer {
 			// into an array
 			// verifies that there is'nt a duplicate user name
 
-			if(userInput.getText().equals("") )  {
+			if (userInput.getText().equals("")) {
 				Alert errorPopUp = new Alert(AlertType.ERROR);
 				errorPopUp.setHeaderText("You Entered an invalid user name");
 				errorPopUp.show();
-			}
-			else {
+			} else {
 				if (button == ButtonType.OK && isCharacterSelected) {
 					String usernameString = userInput.getText();
 
@@ -91,7 +94,7 @@ public class Login extends LostTreasureMain implements Observer {
 					usernamesArray.add(usernameString);
 
 					// writes user name into a txt file for the load feature
-					// writer(usernamesArray);
+					//writer(usernamesArray);
 
 					// gui = new GUI();
 					try {
@@ -102,17 +105,16 @@ public class Login extends LostTreasureMain implements Observer {
 						System.out.println("GUI failed to start");
 					}
 
-				} else if(button == ButtonType.OK && isCharacterSelected==false){
+				} else if (button == ButtonType.OK && isCharacterSelected == false) {
 					Alert errorPopUp = new Alert(AlertType.ERROR);
 					errorPopUp.setHeaderText("You did not select a Character");
 					errorPopUp.show();
-				}
-				else {
+				} else {
 					System.out.println("canceled");
 				}
 
-			}});
-
+			}
+		});
 
 		// load game listener
 		loadGameButton.setOnAction(e -> {
@@ -125,6 +127,7 @@ public class Login extends LostTreasureMain implements Observer {
 
 			}
 		});
+
 		// listener that closes the gui
 		exitButton.setOnAction(e -> {
 			// quits and closes the gui
@@ -184,36 +187,28 @@ public class Login extends LostTreasureMain implements Observer {
 
 		RadioButton archeologistButton = new RadioButton("Archeologist");
 		RadioButton thiefButton = new RadioButton("Thief");
-		
+
 		hBox2.getChildren().add(archeologistButton);
 		hBox2.getChildren().add(thiefButton);
 		ToggleGroup toggleGroup = new ToggleGroup();
 
 		archeologistButton.setToggleGroup(toggleGroup);
 		thiefButton.setToggleGroup(toggleGroup);
-		//setCharacterDescription("Archeologist");
+		// setCharacterDescription("Archeologist");
 
-		archeologistButton.setOnAction(e->{
+		archeologistButton.setOnAction(e -> {
 			Login.gui.setCharacter("You are an Archeologist");
 			isCharacterSelected = true;
 		});
-		thiefButton.setOnAction(e->{
+		thiefButton.setOnAction(e -> {
 			Login.gui.setCharacter("You are a Thief");
 			isCharacterSelected = true;
 
 		});
 
-
 		vBox.getChildren().add(hBox2);
 
 		return vBox;
-
-	}
-
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 
 	}
 

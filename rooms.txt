@@ -3,7 +3,7 @@ Entrance Hall
 Description: A large, rectangular room with the skeletons of the men sworn to guard the Kings treasure strewn about the ground. There is a large, metal door on the southern end of the room, and four small stone archways on the east and west ends of the room.
 r1, r2, r3, r4, r5, r6, r7, r8, r9
 M3
-P1
+none
 none
 0
 false
@@ -12,7 +12,7 @@ Guards Quarters A
 Description: A small room that once served as a guards living quarters. There is a stone bed and a decrepit wooden shelf.
 r0, r2
 M2
-P1
+none
 W5
 0
 false

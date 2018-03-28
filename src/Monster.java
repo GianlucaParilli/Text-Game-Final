@@ -9,12 +9,19 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
+/**
+ * @author Gianluca Parilli, Humberto Michael Lopez
+ * @version 1.0 
+ * @Course : ITEC 3860, Fall, 2017 Written: November 8, 2017
+ *  
+ */
 public class Monster extends Observable {
 	
 	private String monsterID;
@@ -30,13 +37,16 @@ public class Monster extends Observable {
 	private int currentMonster;
 	private int HP;
 	private int currentHP;
+	@SuppressWarnings("unused")
 	private int monsterDamage;
+	@SuppressWarnings("unused")
 	private String updateMVC;
 	private String currentMonsterName;
-	private static ArrayList<Monster> monstersArray = new ArrayList<>();
-	private static ArrayList<Monster> savedState = new ArrayList<>();
+	private ArrayList<Monster> monstersArray = new ArrayList<>();
+	//private static ArrayList<Monster> savedState = new ArrayList<>();
 	private boolean isDead;
 
+	Character player = new Character();
 	Label descriptionText = new Label();
 	
 	public Monster() {
@@ -113,7 +123,7 @@ public class Monster extends Observable {
 		notifyObservers(updateMVC);
 	}
 
-	public void attackPopUp(Button attack, Button flee, Rooms room, Monster monster) {
+	public void attackPopUp(Button attack, Button flee, Rooms room, Monster monster, Character character) {
 
 		Alert popUp = new Alert(AlertType.NONE);
 		popUp.setTitle("Battle");
@@ -124,54 +134,66 @@ public class Monster extends Observable {
 		logo.setFitWidth(64);
 		logo.setFitHeight(64);
 		popUp.setGraphic(logo);
-		attack = new Button("Attack");
-		flee = new Button("Flee");
+		
+		Image attackPic = new Image(getClass().getResourceAsStream("monster/attack.png"));
+		ImageView image = new ImageView(attackPic);
+		image.setFitWidth(48);
+		image.setFitHeight(48);
+		attack = new Button("", image );
+		
+		Image exitPic = new Image(getClass().getResourceAsStream("monster/exit.png"));
+		ImageView exitImage = new ImageView(exitPic);
+		exitImage.setFitWidth(48);
+		exitImage.setFitHeight(48);
+		flee = new Button("", exitImage );
+		
 
 		popUp.getButtonTypes().add(ButtonType.CANCEL);
 		popUp.hide();
 		popUp.getButtonTypes().remove(ButtonType.CANCEL);
-
+	
 		attack.setOnAction(e -> {
 			monster.addObserver(LostTreasureMain.gui);
 			Monster monsterTemp = monster.getMonstersArray().get(monster.currentMonster);	
 			int currentHP = monsterTemp.getHP();
 			int monDamage = monsterTemp.getDamageGiven();
-			int damage = Character.player.getCharDamage();	
-			int playerHP = Character.player.getCharHealth();
+			int damage = character.getCharDamage();	
+			int playerHP = character.getCharHealth();
 			
 			if (currentHP > 0) {
 				System.out.println("Attacked NOWWW");
 				currentHP = currentHP - damage;
 				System.out.println("current monster Hp "+currentHP);
 				monsterTemp.setHP(currentHP);
-				Character.player.setCharHealth(playerHP - monDamage);
+				character.setCharHealth(playerHP - monDamage);
 				System.out.println("Player HP: " + playerHP);
-				if (currentHP > 0) {
-					setUpdateMVC("You attacked a "+ monsterTemp.getMonsterName() +"\n\n\n"+ 
-					"Monster's HP "+currentHP + "\n\n"+ "Player's HP "+playerHP);
-					GUI.hp.setText(Character.player.getCharHealth() + "/1000 HP");
-				} else {
 				setUpdateMVC("You attacked a "+ monsterTemp.getMonsterName() +"\n\n\n"+ 
-				"Monster's HP "+ "0" + "\n\n"+ "Player's HP "+playerHP);
-				GUI.hp.setText(Character.player.getCharHealth() + "/1000 HP");
-				}
-			}else{
+				"Monster's HP "+currentHP + "\n\n"+ "Player's HP "+playerHP);
+				
+			}
+			if(currentHP<0) {
 				setUpdateMVC("You defeated the "+ monsterTemp.getMonsterName() +"\n\n\n");
 				System.out.println("Monster has been defeated!");
-				LostTreasureMain.gui.examineMonster.setDisable(true);
 				popUp.close();
+				LostTreasureMain.gui.examineMonster.setDisable(true);
+
 				monsterTemp.setDead(true);
 				System.out.println(monsterTemp.isDead());
 				room.disableButton(LostTreasureMain.gui.examineMonster);
 				monsterTemp.setHP(monster.getMonstersArray().get(monster.getCurrentMonster()).getCurrentHP());
-				System.out.println(monster.getSavedState().get(monster.getCurrentMonster()).getHP());
+				System.out.println("bla" + monstersArray.get(monster.getCurrentMonster()).getHP());
+				
+				GUI.gui.playerChar.setCharXP(monstersArray.get(monster.getCurrentMonster()).getHP());
+				
+				GUI.gui.playerChar.setMonsterDefeated(true);
+				
 			}
+			
 			
 		});
 		
 		flee.setOnAction(e -> {
 			monster.addObserver(LostTreasureMain.gui);
-		
 			monster.FleeMonster(room.getCurrentRoom());
 			// quits and closes the gui
 			popUp.close();
@@ -181,7 +203,7 @@ public class Monster extends Observable {
 		});
 		// description pane for popUp
 		HBox monsterDescription = new HBox(15);
-		monsterDescription.setMinHeight(300);
+		monsterDescription.setMinHeight(200);
 		monsterDescription.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 1;"
 				+ "-fx-border-insets: 10;" + "-fx-border-radius: 10;" + "-fx-border-color: black;");
 		monsterDescription.setMinWidth(300);
@@ -246,28 +268,6 @@ public class Monster extends Observable {
 
 		return currentID;
 	}
-/*	public String currentMonsterName(String monsterID) {
-		int currentID=0;
-		String currentName="";
-		//System.out.println("monsters position " +getMonstersArray().get(0));
-		for(Monster m : getMonstersArray()) {
-			if(m.getMonsterID().equals(monsterID)) {
-				currentID = getMonstersArray().indexOf(m);
-				System.out.println("current monster " + m.getMonsterName());
-				
-			currentName = m.getMonsterName();
-
-			}
-		}
-		System.out.println("current monster namwww " + currentName);
-
-		return currentName;
-	}*/
-	/*public void fleeMonster() {
-		 System.out.println("You have fled the monster, no experience gained");
-	}
-	
-	*/
 	public void monsterReader() throws FileNotFoundException {
 		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(new File("monster.txt"));
@@ -298,7 +298,6 @@ public class Monster extends Observable {
 			Monster monster = new Monster( monsterID, currentMonster, monsterName, monsterDescription, EXP, 
 					damageGiven, healthPoints, HP, attackPercentage, artifactsDropped, isDead, currentHP);
 			monstersArray.add(monster);
-			savedState.add(monster);
 		}
 	}
 
@@ -408,19 +407,6 @@ public class Monster extends Observable {
 		this.currentHP = currentHP;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void reset() {
-		monstersArray = (ArrayList<Monster>) savedState.clone();
-	}
-	
-	public ArrayList<Monster> getSavedState() {
-		return savedState;
-	}
-
-	public static void setSavedState(ArrayList<Monster> savedState) {
-		Monster.savedState = savedState;
-	}
-	
 	public boolean isDead() {
 		return isDead;
 	}
@@ -428,4 +414,5 @@ public class Monster extends Observable {
 	public void setDead(boolean isDead) {
 		this.isDead = isDead;
 	}
+	
 }
